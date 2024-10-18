@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -26,6 +25,7 @@ namespace GridSystem
         #if UNITY_EDITOR
         private void OnValidate()
         {
+            return;
             if (Application.isPlaying) return;
             if (generatingGrid) return;
             GenerateGrid();
@@ -64,7 +64,7 @@ namespace GridSystem
                     {
                         var gridItem = Instantiate(cardPrefab, row.transform).GetComponent<GridItem>();
                         gridItems.Add(gridItem);
-                        gridItem.Initialise(OnGridItemClick);
+                        gridItem.Initialise();
                     }
                     else
                     {
@@ -103,7 +103,7 @@ namespace GridSystem
         {
             foreach (var item in gridItems)
             {
-                item.ResetCard();
+                item.ResetItem();
             }
             gridItems.Clear();
         }

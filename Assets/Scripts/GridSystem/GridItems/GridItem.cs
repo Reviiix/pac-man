@@ -5,15 +5,14 @@ using UnityEngine.UI;
 namespace GridSystem
 {
     [RequireComponent(typeof(Image))]
-    [RequireComponent(typeof(Button))]
-    public class GridItem : MonoBehaviour
+    public abstract class GridItem : MonoBehaviour
     {
         private bool Initialised { get; set; }
         private bool Active { get; set; }
-        private Image display;
+        protected Image Display;
         private Action<GridItem> onClick;
 
-        public void Initialise(Action<GridItem> gridManagerOnClick)
+        public void Initialise()
         {
             if (Initialised)
             {
@@ -21,7 +20,6 @@ namespace GridSystem
                 return;
             }
             AssignFields();
-            SubscribeToEvents(gridManagerOnClick);
             Initialised = true;
             Active = true;
         }
@@ -29,15 +27,9 @@ namespace GridSystem
         private void AssignFields()
         {
             //Secured by the require component attribute.
-            GetComponent<Button>().onClick.AddListener(OnClick);
-            display = GetComponent<Image>();
+            Display = GetComponent<Image>();
         }
-    
-        private void SubscribeToEvents(Action<GridItem> gridManagerOnClick)
-        {
-            onClick += gridManagerOnClick;
-        }
-    
+
         private void OnDisable()
         {
             if (onClick != null)
@@ -52,9 +44,30 @@ namespace GridSystem
             onClick(this);
         }
 
-        public void ResetCard(bool instant = true)
+        public void ResetItem()
         {
             Active = true;
         }
+        
+        protected void RemoveSelf()
+        {
+            if (Application.isPlaying)
+            {
+                Destroy(this);
+            }
+            else
+            {
+                UnityEditor.EditorApplication.delayCall+=()=>
+                {
+                    DestroyImmediate(this);
+                };
+            }
+        }
+
+        public void SetComponentOrder(GridItem component)
+        {
+            UnityEditorInternal.ComponentUtility.MoveComponentUp(component);
+        }
+        
     }
 }
