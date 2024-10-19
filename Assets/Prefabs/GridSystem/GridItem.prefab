@@ -50,6 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50a82db477cce492ea6d449bc35f0d8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pelletPrefab: {fileID: 3035900179511735125, guid: f8624777aa4cf4d15a51cdc663afd8e6, type: 3}
 --- !u!222 &485268106570748756
 CanvasRenderer:
   m_ObjectHideFlags: 0

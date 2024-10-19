@@ -4,7 +4,8 @@ namespace GridSystem.GridItems
 {
     public class Wall : GridItem
     {
-        public void SetWall()
+        #if UNITY_EDITOR
+        public void InitialiseWall()
         {
             Initialise(Indices);
             Display.color = Color.black;
@@ -14,8 +15,9 @@ namespace GridSystem.GridItems
         public void RevertToBlank()
         {
             var v = gameObject.AddComponent<Blank>();
-            v.SetBlank();
+            v.InitialiseBlank();
             RemoveSelf();
         }
+        #endif
     }
 }

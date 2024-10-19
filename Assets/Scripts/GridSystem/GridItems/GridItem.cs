@@ -13,8 +13,11 @@ namespace GridSystem.GridItems
         public KeyValuePair<int, int> Indices { get;  private set; } //Key = X, Value = Y
         protected Image Display;
         private GridItem[] neighbors;
-        
-        public void Initialise(KeyValuePair<int, int> indices)
+        #if UNITY_EDITOR
+        [SerializeField] protected GameObject pelletPrefab; //These references are only needed while building the Grid, no point in storing them in builds
+        #endif
+
+        public virtual void Initialise(KeyValuePair<int, int> indices)
         {
             Display = GetComponent<Image>();
             Indices = indices;
@@ -33,7 +36,6 @@ namespace GridSystem.GridItems
                 //Row Below
                 GridManager.Instance.GetItem(new KeyValuePair<int, int>(Indices.Key+1,Indices.Value)),
             };
-            
             neighbors = neighbors.Where(x => x != null).ToArray(); //Remove edge piece neighbors
         }
         
