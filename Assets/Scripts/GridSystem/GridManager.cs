@@ -1,13 +1,14 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using GridSystem.GridItems;
 using UnityEngine;
 
 namespace GridSystem
 {
     [ExecuteInEditMode]
-    public class GridManager : MonoBehaviour
+    public class GridManager : Singleton<GridManager>
     {
-        public static Action<GridItem> OnItemClick;
         private bool generatingGrid;
         private const string GridTag = "Grid";
         private readonly List<GridItem> gridItems = new ();
@@ -22,6 +23,7 @@ namespace GridSystem
         [SerializeField] [Range(MinimumItems, MaximumRows)] public int amountOfRows = MaximumRows / 2;
         [SerializeField] [Range(MinimumItems, MaximumColumns)] public int amountOfColumns = MaximumColumns / 2;
 
+        #region Generate Grid
         #if UNITY_EDITOR
         private void OnValidate()
         {
@@ -39,8 +41,19 @@ namespace GridSystem
             amountOfColumns = MaximumColumns / 2;
             GenerateGrid();
         }
-        #endif
-
+        
+        [ContextMenu(nameof(Initialise))]
+        public void Initialise()
+        {
+            SetGridItemsCollection();
+            foreach (var item in gridItems)
+            {
+                item.Initialise(item.Indices);
+            }
+            SetNeighbors();
+        }
+        #endif 
+        
         private void GenerateGrid(Action completeCallback = null)
         {
             generatingGrid = true;
@@ -63,8 +76,8 @@ namespace GridSystem
                     if (Application.isPlaying)
                     {
                         var gridItem = Instantiate(cardPrefab, row.transform).GetComponent<GridItem>();
+                        gridItem.Initialise(new KeyValuePair<int, int>(j, i));
                         gridItems.Add(gridItem);
-                        gridItem.Initialise();
                     }
                     else
                     {
@@ -72,12 +85,35 @@ namespace GridSystem
                     }
                 }
             }
+            SetNeighbors();
             completeCallback?.Invoke();
+        }
+        
+        private void SetNeighbors()
+        {
+            foreach (var item in gridItems)
+            {
+                item.SetNeighbors();
+            }
+        }
+        
+        private void SetGridItemsCollection()
+        {
+            gridItems.Clear();
+            gridObject = GameObject.FindWithTag(GridTag);
+            for (var i = 0; i < amountOfRows; i++)
+            {
+                for (var j = 0; j < amountOfColumns; j++)
+                {
+                    var v = gridObject.transform.GetChild(i).transform.GetChild(j).GetComponent<GridItem>();
+                    gridItems.Add(v);
+                    v.Initialise(new KeyValuePair<int, int>(j, i));
+                }
+            }
         }
 
         private void ResetGrid(Action completeCallback = null)
         {
-            ResetGridItems();
             gridObject = GameObject.FindWithTag(GridTag);
             if (!gridObject)
             {
@@ -98,20 +134,14 @@ namespace GridSystem
                 };
             }
         }
-    
-        private void ResetGridItems()
-        {
-            foreach (var item in gridItems)
-            {
-                item.ResetItem();
-            }
-            gridItems.Clear();
-        }
+        #endregion Generate Grid
+        
 
-        private static void OnGridItemClick(GridItem gridItem)
+        public GridItem GetItem(KeyValuePair<int, int> indices)
         {
-            Debug.Log($"{gridItem.name} clicked.");
-            OnItemClick?.Invoke(gridItem);
+            var x = indices.Key; //Cache for LINQs hidden multiple access.
+            var y = indices.Value;
+            return gridItems.Where(gridItem => gridItem.Indices.Key == x).FirstOrDefault(gridItem => gridItem.Indices.Value == y);
         }
     }
 }
