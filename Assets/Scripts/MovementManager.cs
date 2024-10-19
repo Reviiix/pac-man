@@ -2,16 +2,21 @@ using System;
 using System.Collections;
 using System.Linq;
 using Abstractions;
-using GridSystem;
 using GridSystem.GridItems;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class MovementManager : Singleton<MovementManager>
 {
-    [SerializeField] private int speed;
-    [SerializeField] private Transform[] player;
-    [SerializeField] private GridItem currentPosition;
-    [SerializeField] private GridItem nextPosition;
+    //job system works better with collections than single objects
+    [SerializeField] private Transform[] objectsToMove;
+    //0 = player
+    //1 = enemy
+    [Header(nameof(player))]
+    [SerializeField] private Transform player;
+    [FormerlySerializedAs("speed")] [SerializeField] private int playerSpeed;
+    [FormerlySerializedAs("currentPosition")] [SerializeField] private GridItem currentPlayerPosition;
+    [FormerlySerializedAs("nextPosition")] [SerializeField] private GridItem nextPlayerPosition;
     private readonly WaitUntil waitUntilPlayerHasReachedCurrentTarget = new (() => !_moving);
     private bool canMove;
     private static bool _moving;
@@ -19,18 +24,13 @@ public class MovementManager : Singleton<MovementManager>
     private const int CurrentPositionDistanceTolerance = 10;
     private Coroutine directionChange;
     public Direction currentDirection;
-
-
+    [Header("Enemies")]
+    [SerializeField] private Transform one;
+    
     public void Initialise()
     {
         SetNextPosition(GetNextPosition(currentDirection));
         canMove = true;
-    }
-
-    private IEnumerator WaitUntilPlayerHasReachedTarget(Action callBack)
-    {
-        yield return waitUntilPlayerHasReachedCurrentTarget;
-        callBack();
     }
 
     private void Update()
@@ -59,6 +59,31 @@ public class MovementManager : Singleton<MovementManager>
             DetermineDirectionChange(KeyCode.D);
         }
     }
+    
+    private void MovePlayer()
+    {
+        if (nextPlayerPosition is Wall) return;
+        var targetDestination = nextPlayerPosition.transform.position;
+        _moving = true;
+        MovementJobs.MoveObjects(objectsToMove, new [] {Vector3.MoveTowards(player.position, targetDestination, playerSpeed * Time.deltaTime)});
+        if (NewPositionReached())
+        {
+            OnDestinationReached();
+        }
+    }
+    
+    private void OnDestinationReached()
+    {
+        SetCurrentPosition(nextPlayerPosition);
+        MovePlayerToCurrentGridItem();
+        SetNextPosition(GetNextPosition(currentDirection));
+        _moving = false;
+    }
+
+    private void MovePlayerToCurrentGridItem()
+    {
+        MovementJobs.MoveObjects(objectsToMove, new [] {Vector3.MoveTowards(player.transform.position, currentPlayerPosition.transform.position, playerSpeed * Time.deltaTime)});
+    }
 
     private void DetermineDirectionChange(KeyCode key)
     {
@@ -80,77 +105,53 @@ public class MovementManager : Singleton<MovementManager>
     private void ChangeDirection(KeyCode key)
     {
         var direction = GetDirectionFromKeyCode(key);
-        if (currentPosition.GetAdjacentItem(direction) is Wall) return;
+        if (currentPlayerPosition.GetAdjacentItem(direction) is Wall) return;
         currentDirection = direction;
-        SetCurrentPosition(currentPosition);
-        SetNextPosition(currentPosition.GetAdjacentItem(currentDirection));
+        SetCurrentPosition(currentPlayerPosition);
+        SetNextPosition(currentPlayerPosition.GetAdjacentItem(currentDirection));
     }
 
     private Direction GetDirectionFromKeyCode(KeyCode key)
     {
-        switch (key)
+        return key switch
         {
-            case KeyCode.W:
-                return Direction.Up;
-            case KeyCode.A:
-                return Direction.Left;
-            case KeyCode.S:
-                return Direction.Down;
-            case KeyCode.D:
-                return Direction.Right;
-        }
-
-        return currentDirection;
-    }
-    
-    private void MovePlayer()
-    {
-        if (nextPosition is Wall) return;
-        var targetDestination = nextPosition.transform.position;
-        _moving = true;
-        MovementJobs.MoveObjects(player, new [] {Vector3.MoveTowards(player.FirstOrDefault().transform.position, targetDestination, speed * Time.deltaTime)});
-        if (NewPositionReached())
-        {
-            OnDestinationReached();
-        }
+            KeyCode.W => Direction.Up,
+            KeyCode.A => Direction.Left,
+            KeyCode.S => Direction.Down,
+            KeyCode.D => Direction.Right,
+            _ => currentDirection
+        };
     }
 
     private bool CloseToCurrentGridItem()
     {
-        return Vector3.Distance(player.FirstOrDefault().transform.position, currentPosition.transform.position) < CurrentPositionDistanceTolerance;
+        return Vector3.Distance(player.position, currentPlayerPosition.transform.position) < CurrentPositionDistanceTolerance;
     }
 
     private bool NewPositionReached()
     {
-        return Vector3.Distance(player.FirstOrDefault().transform.position, nextPosition.transform.position) < NewPositionDistanceTolerance;
-    }
-
-    private void OnDestinationReached()
-    {
-        SetCurrentPosition(nextPosition);
-        MovePlayerToCurrentGridItem();
-        SetNextPosition(GetNextPosition(currentDirection));
-        _moving = false;
-    }
-
-    private void MovePlayerToCurrentGridItem()
-    {
-        MovementJobs.MoveObjects(player, new [] {Vector3.MoveTowards(player.FirstOrDefault().transform.position, currentPosition.transform.position, speed * Time.deltaTime)});
+        return Vector3.Distance(player.transform.position, nextPlayerPosition.transform.position) < NewPositionDistanceTolerance;
     }
 
     private void SetCurrentPosition(GridItem position)
     {
-        currentPosition = position;
+        currentPlayerPosition = position;
     }
     
     private void SetNextPosition(GridItem position)
     {
-        nextPosition = position;
+        nextPlayerPosition = position;
     }
 
     private GridItem GetNextPosition(Direction direction)
     {
-        return nextPosition.GetAdjacentItem(direction);
+        return nextPlayerPosition.GetAdjacentItem(direction);
+    }
+    
+    private IEnumerator WaitUntilPlayerHasReachedTarget(Action callBack)
+    {
+        yield return waitUntilPlayerHasReachedCurrentTarget;
+        callBack();
     }
 }
 
