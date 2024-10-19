@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3113015454398441567}
   - component: {fileID: 4094798397681923027}
-  - component: {fileID: 2744580129406376731}
   - component: {fileID: 3675241345141689567}
   m_Layer: 5
   m_Name: GridRow
@@ -50,14 +49,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20f34b8941a6d47f5a36eca3662ff1af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!222 &2744580129406376731
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2809608080937566506}
-  m_CullTransparentMesh: 1
 --- !u!114 &3675241345141689567
 MonoBehaviour:
   m_ObjectHideFlags: 0

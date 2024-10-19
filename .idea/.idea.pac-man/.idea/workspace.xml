@@ -2,11 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c58d8378-5f45-4888-8846-57f9124cd50c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/GridSystem/GridItem.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/GridSystem/GridItem.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/GridSystem.unity" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/GridSystem.unity.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItem.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItem.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.pac-man/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.pac-man/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/GridSystem/Grid.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/GridSystem/Grid.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/GridSystem/GridRow.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/GridSystem/GridRow.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Levels/ClassicPacMan.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Levels/ClassicPacMan.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Pacman.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Pacman.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItems/Blank.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItems/Blank.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItems/GridItem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItems/GridItem.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItems/Wall.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItems/Wall.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/GridSystem/GridManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GridSystem/GridManager.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -19,10 +22,40 @@
     <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../Indiespring/ftp-keno/Assets/ftp-poker-shared/Scripts/Core/Services/RemoteConfig/RemoteConfigManager.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../kong/Assets/Scripts/Player/PlayerMovement.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItems/Blank.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItems/Wall.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/MovementManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/ProjectInitializer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/3ff87c59c5ac40d69c02c27bc5571d641dd800/73/0d984a5b/Transform.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/612b34e14c5a4a38829eadeb01924d451f2c00/1a/583959f3/LayoutDataStore.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7c71ea008dbd49c384e65c290b343b8d9afa00/1f/8631d3cb/ComponentUtility.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/Library/Unity/cache/packages/packages.unity.com/com.unity.burst@1.8.17/Tests/Runtime/Shared/084-Loops.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -76,10 +109,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="30304">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="38279">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="30304" />
+      <option name="pid" value="38279" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -96,7 +129,8 @@
       <option name="presentableId" value="Default" />
       <updated>1729246508733</updated>
       <workItem from="1729246510064" duration="974000" />
-      <workItem from="1729247503880" duration="7367000" />
+      <workItem from="1729247503880" duration="12459000" />
+      <workItem from="1729273544778" duration="27732000" />
     </task>
     <servers />
   </component>
@@ -107,24 +141,5 @@
   <component name="UnityUnitTestConfiguration" currentTestLauncher="EditMode" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItems/GridItem.cs</url>
-          <line>68</line>
-          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItems/GridItem.cs" initialLine="76" containingFunctionPresentation="method 'SetComponentOrder'">
-            <startOffsets>
-              <option value="1604" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1668" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
