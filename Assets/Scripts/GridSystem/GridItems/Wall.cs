@@ -1,20 +1,21 @@
-using GridSystem;
 using UnityEngine;
 
-public class Wall : GridItem
+namespace GridSystem.GridItems
 {
-    public void SetWall()
+    public class Wall : GridItem
     {
-        Initialise();
-        Display.color = Color.black;
-    }
+        public void SetWall()
+        {
+            Initialise(Indices);
+            Display.color = Color.black;
+        }
     
-    [ContextMenu(nameof(RevertToBlank))]
-    public void RevertToBlank()
-    {
-        var v = gameObject.AddComponent<Blank>();
+        [ContextMenu(nameof(RevertToBlank))]
+        public void RevertToBlank()
+        {
+            var v = gameObject.AddComponent<Blank>();
             v.SetBlank();
-        SetComponentOrder(v);
-        RemoveSelf();
+            RemoveSelf();
+        }
     }
 }

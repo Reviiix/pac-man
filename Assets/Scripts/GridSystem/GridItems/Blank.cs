@@ -1,27 +1,27 @@
-using GridSystem;
 using UnityEngine;
 
-public class Blank : GridItem
+namespace GridSystem.GridItems
 {
-    public void SetBlank()
+    public class Blank : GridItem
     {
-        Initialise();
-        Display.color = Color.white;
-    }
+        public void SetBlank()
+        {
+            Initialise(Indices);
+            Display.color = Color.white;
+        }
     
-    [ContextMenu(nameof(AddPellet))]
-    public void AddPellet()
-    {
-        gameObject.AddComponent<Wall>().SetWall();
-        SetComponentOrder(this);
-        RemoveSelf();
-    }
+        [ContextMenu(nameof(AddPellet))]
+        public void AddPellet()
+        {
+            gameObject.AddComponent<Wall>().SetWall();
+            RemoveSelf();
+        }
     
-    [ContextMenu(nameof(MakeWall))]
-    public void MakeWall()
-    {
-        gameObject.AddComponent<Wall>().SetWall();
-        SetComponentOrder(this);
-        RemoveSelf();
+        [ContextMenu(nameof(MakeWall))]
+        public void MakeWall()
+        {
+            gameObject.AddComponent<Wall>().SetWall();
+            RemoveSelf();
+        }
     }
 }
