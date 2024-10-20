@@ -3,15 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="c58d8378-5f45-4888-8846-57f9124cd50c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.pac-man/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.pac-man/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Pacman.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Pacman.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItems/Blank.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItems/Blank.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItems/GridItem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItems/GridItem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GridSystem/GridManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GridSystem/GridManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/MovementManager.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/MovementManager.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ProjectInitializer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ProjectInitializer.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,7 +96,7 @@
       <workItem from="1729273544778" duration="27732000" />
       <workItem from="1729364688211" duration="3364000" />
       <workItem from="1729368758472" duration="4144000" />
-      <workItem from="1729374215350" duration="11137000" />
+      <workItem from="1729374215350" duration="12111000" />
     </task>
     <servers />
   </component>
