@@ -3,7 +3,15 @@
   <component name="ChangeListManager">
     <list default="true" id="c58d8378-5f45-4888-8846-57f9124cd50c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.pac-man/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.pac-man/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/MovementManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/MovementManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Pacman.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Pacman.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItems/Blank.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItems/Blank.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItems/GridItem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItems/GridItem.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GridSystem/GridManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GridSystem/GridManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/MovementManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/MovementManager.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ProjectInitializer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ProjectInitializer.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,7 +23,6 @@
     <setting file="file://$PROJECT_DIR$/../kong/Assets/Scripts/Player/PlayerMovement.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItems/Blank.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItems/Wall.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/MovementManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/ProjectInitializer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/3ff87c59c5ac40d69c02c27bc5571d641dd800/73/0d984a5b/Transform.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/612b34e14c5a4a38829eadeb01924d451f2c00/1a/583959f3/LayoutDataStore.cs" root0="SKIP_HIGHLIGHTING" />
@@ -74,10 +81,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="53864">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" />
+      <option name="pid" value="53864" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -98,7 +105,7 @@
       <workItem from="1729273544778" duration="27732000" />
       <workItem from="1729364688211" duration="3364000" />
       <workItem from="1729368758472" duration="4144000" />
-      <workItem from="1729374215350" duration="490000" />
+      <workItem from="1729374215350" duration="11137000" />
     </task>
     <servers />
   </component>

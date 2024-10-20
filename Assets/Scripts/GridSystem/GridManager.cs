@@ -31,7 +31,7 @@ namespace GridSystem
             var y = indices.Value;
             return gridItems.Where(gridItem => gridItem.Indices.Key == x).FirstOrDefault(gridItem => gridItem.Indices.Value == y);
         }
-        
+
         #region Generate Grid
         #if UNITY_EDITOR
         private void OnValidate()

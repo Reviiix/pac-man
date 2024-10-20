@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Movement;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,7 +10,6 @@ namespace GridSystem.GridItems
     [RequireComponent(typeof(Image))]
     public abstract class GridItem : MonoBehaviour
     {
-        private bool Initialised { get; set; }
         public KeyValuePair<int, int> Indices { get;  private set; } //Key = X, Value = Y
         protected Image Display;
         private GridItem[] neighbors;
@@ -17,11 +17,10 @@ namespace GridSystem.GridItems
         [SerializeField] protected GameObject pelletPrefab; //These references are only needed while building the Grid, no point in storing them in builds
         #endif
 
-        public virtual void Initialise(KeyValuePair<int, int> indices)
+        public void Initialise(KeyValuePair<int, int> indices)
         {
             Display = GetComponent<Image>();
             Indices = indices;
-            Initialised = true;
         }
 
         public void SetNeighbors()
@@ -38,15 +37,15 @@ namespace GridSystem.GridItems
             };
             neighbors = neighbors.Where(x => x != null).ToArray(); //Remove edge piece neighbors
         }
-        
-        public GridItem GetAdjacentItem(Direction direction)
+
+        public GridItem GetAdjacentItem(MovementManager.Direction direction)
         {
             return direction switch
             {
-                Direction.Up => GetUpperNeighbor(),
-                Direction.Down => GetLowerNeighbor(),
-                Direction.Left => GetLeftNeighbor(),
-                Direction.Right => GetRightNeighbor(),
+                MovementManager.Direction.Up => GetUpperNeighbor(),
+                MovementManager.Direction.Down => GetLowerNeighbor(),
+                MovementManager.Direction.Left => GetLeftNeighbor(),
+                MovementManager.Direction.Right => GetRightNeighbor(),
                 _ => throw new ArgumentOutOfRangeException(nameof(direction), direction, $"{nameof(direction)} is not accounted for in the switch statement")
             };
         }
@@ -69,6 +68,11 @@ namespace GridSystem.GridItems
         private GridItem GetRightNeighbor()
         {
             return neighbors.FirstOrDefault(x => x.Indices.Key == Indices.Key + 1);
+        }
+        
+        public bool MultiplePathWaysAvailable()
+        {
+            return neighbors.Count(x => x is Blank) > 2;
         }
 
         protected void RemoveSelf()
