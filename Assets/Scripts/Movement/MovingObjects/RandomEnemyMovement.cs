@@ -14,22 +14,21 @@ namespace Movement
             base.OnDestinationReached();
             if (ShouldChangeDirection())
             {
-                ChangeDirection(GetRandomDirection());   
+                ChangeDirection(GetValidRandomDirection(currentMovementDirection));   
             }
         }
 
         private bool ShouldChangeDirection()
         {
-            return currentPosition.GetAdjacentItem(currentDirection) is Wall || ShouldTakeAlternativeRoute();
+            return currentPosition.GetAdjacentItem(currentMovementDirection) is Wall || ShouldTakeAlternativeRoute();
         }
 
         private bool ShouldTakeAlternativeRoute()
         {
-            var randomChance = UnityEngine.Random.Range(0, directions.Length);
-            return randomChance == 0 && currentPosition.MultiplePathWaysAvailable();
+            return Random.Range(0, directions.Length) == 0 && currentPosition.MultiplePathWaysAvailable();
         }
 
-        private MovementManager.Direction GetRandomDirection()
+        private MovementManager.Direction GetValidRandomDirection(MovementManager.Direction currentDirection)
         {
             while (true)
             {
@@ -37,9 +36,8 @@ namespace Movement
 
                 if (randomDirection == currentDirection) continue;
                 
-                if (randomDirection == MovementManager.GetOppositeDirection(currentDirection)) continue;
-
                 if (currentPosition.GetAdjacentItem(randomDirection) is Wall) continue;
+
                 return randomDirection;
             }
         }

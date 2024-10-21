@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using GridSystem.GridItems;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Movement
 {
@@ -18,14 +19,14 @@ namespace Movement
         private bool canMove;
         private bool moving;
         private Coroutine directionChange;
-        public MovementManager.Direction currentDirection;
+        [FormerlySerializedAs("currentDirection")] public MovementManager.Direction currentMovementDirection;
         private MonoBehaviour coroutiner;
         
         public void Initialise(MonoBehaviour coroutineHandler)
         {
             coroutiner = coroutineHandler;
             waitUntilReachedCurrentTarget = new WaitUntil(() => !moving);
-            SetNextPosition(GetNextPosition(currentDirection));
+            SetNextPosition(GetNextPosition(currentMovementDirection));
             canMove = true;
         }
         
@@ -44,7 +45,7 @@ namespace Movement
         {
             SetCurrentPosition(nextPosition);
             MoveToCurrentGridItem();
-            SetNextPosition(GetNextPosition(currentDirection));
+            SetNextPosition(GetNextPosition(currentMovementDirection));
             moving = false;
         }
 
@@ -73,9 +74,9 @@ namespace Movement
         protected void ChangeDirection(MovementManager.Direction direction)
         {
             if (currentPosition.GetAdjacentItem(direction) is Wall) return;
-            currentDirection = direction;
+            currentMovementDirection = direction;
             SetCurrentPosition(currentPosition);
-            SetNextPosition(currentPosition.GetAdjacentItem(currentDirection));
+            SetNextPosition(currentPosition.GetAdjacentItem(currentMovementDirection));
         }
         
         public Vector3 GetDestination()
@@ -92,7 +93,7 @@ namespace Movement
                 KeyCode.A => MovementManager.Direction.Left,
                 KeyCode.S => MovementManager.Direction.Down,
                 KeyCode.D => MovementManager.Direction.Right,
-                _ => currentDirection
+                _ => currentMovementDirection
             };
         }
 

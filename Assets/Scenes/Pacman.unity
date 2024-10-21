@@ -316,7 +316,7 @@ GameObject:
   - component: {fileID: 591483890}
   - component: {fileID: 591483891}
   m_Layer: 0
-  m_Name: PlayerMovement
+  m_Name: MovementManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -354,13 +354,13 @@ MonoBehaviour:
     speed: 100
     currentPosition: {fileID: 0}
     nextPosition: {fileID: 1959838732}
-    currentDirection: 3
+    currentMovementDirection: 2
   randomEnemy:
     transform: {fileID: 1949173121}
     speed: 100
     currentPosition: {fileID: 0}
     nextPosition: {fileID: 1743687923}
-    currentDirection: 2
+    currentMovementDirection: 2
 --- !u!1 &849918526
 GameObject:
   m_ObjectHideFlags: 0

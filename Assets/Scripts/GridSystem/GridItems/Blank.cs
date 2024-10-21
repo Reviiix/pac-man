@@ -12,8 +12,8 @@ namespace GridSystem.GridItems
         private void RemovePellet()
         {
             if (!hasPellet) return;
-            DestroyPelletObject();
             hasPellet = false;
+            DestroyPelletObject();
         }
 
         private void DestroyPelletObject()
@@ -32,24 +32,32 @@ namespace GridSystem.GridItems
         }
 
         #if UNITY_EDITOR
-        public void InitialiseBlank()
+        public void InitialiseBlank(GameObject newPelletPrefab)
         {
             Initialise(Indices);
+            pelletPrefab = newPelletPrefab;
             Display.color = Color.white;
+            UnityEditorInternal.ComponentUtility.MoveComponentUp(GetComponent<Blank>());
         }
     
         [ContextMenu(nameof(AddPellet))]
-        public void AddPellet()
+        private void AddPellet()
         {
+            if (hasPellet)
+            {
+                Debug.LogWarning($"Attempting to add a duplicate {nameof(pelletPrefab)} to {nameof(GridItem)}: {Indices.Key},{Indices.Value}. Skipped creation to avoid duplicate.");
+                return;
+            }
+            hasPellet = true;
             var parent = transform;
             pellet = Instantiate(pelletPrefab, parent.position, Quaternion.identity, parent);
-            hasPellet = true;
         }
     
-        [ContextMenu(nameof(MakeWall))]
-        public void MakeWall()
+        [ContextMenu(nameof(ChangeToWall))]
+        private void ChangeToWall()
         {
-            gameObject.AddComponent<Wall>().InitialiseWall();
+            gameObject.AddComponent<Wall>().InitialiseWall(pelletPrefab);
+            RemovePellet();
             RemoveSelf();
         }
         #endif

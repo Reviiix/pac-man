@@ -3,6 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="c58d8378-5f45-4888-8846-57f9124cd50c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.pac-man/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.pac-man/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/GridSystem/GridItem.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/GridSystem/GridItem.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Levels/ClassicPacMan.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Levels/ClassicPacMan.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Pacman.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Pacman.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItems/Blank.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItems/Blank.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItems/Wall.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItems/Wall.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Movement/MovementManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Movement/MovementManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Movement/MovingObjects/MovingObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Movement/MovingObjects/MovingObject.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Movement/MovingObjects/RandomEnemyMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Movement/MovingObjects/RandomEnemyMovement.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,7 +26,18 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/3ff87c59c5ac40d69c02c27bc5571d641dd800/73/0d984a5b/Transform.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/612b34e14c5a4a38829eadeb01924d451f2c00/1a/583959f3/LayoutDataStore.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7c71ea008dbd49c384e65c290b343b8d9afa00/1f/8631d3cb/ComponentUtility.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/Library/Unity/cache/packages/packages.unity.com/com.unity.2d.aseprite@1.1.6/Editor/AsepriteImporterAPIs.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/Library/Unity/cache/packages/packages.unity.com/com.unity.2d.aseprite@1.1.6/Editor/AsepriteSpriteEditorDataProvider.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/Library/Unity/cache/packages/packages.unity.com/com.unity.2d.aseprite@1.1.6/Editor/Common/ImagePacker/ImagePacker.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/Library/Unity/cache/packages/packages.unity.com/com.unity.2d.aseprite@1.1.6/Editor/Common/InternalBridge/ModelPreviewer.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/Library/Unity/cache/packages/packages.unity.com/com.unity.2d.aseprite@1.1.6/Editor/Tasks/CellTasks.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/Library/Unity/cache/packages/packages.unity.com/com.unity.2d.aseprite@1.1.6/Editor/TextContent.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/Library/Unity/cache/packages/packages.unity.com/com.unity.2d.aseprite@1.1.6/Editor/UserSettings.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/Library/Unity/cache/packages/packages.unity.com/com.unity.2d.aseprite@1.1.6/Editor/Utilities/ImportUtilities.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/Library/Unity/cache/packages/packages.unity.com/com.unity.burst@1.8.17/Editor/BurstDisassembler.Core.x86.info.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/Library/Unity/cache/packages/packages.unity.com/com.unity.burst@1.8.17/Tests/Runtime/Shared/081-UnityMath.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/Library/Unity/cache/packages/packages.unity.com/com.unity.burst@1.8.17/Tests/Runtime/Shared/084-Loops.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/Library/Unity/cache/packages/packages.unity.com/com.unity.burst@1.8.17/Tests/Runtime/Shared/TestCompilerAttributeBase.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -72,10 +91,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="53864">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="53864" />
+      <option name="pid" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -97,6 +116,9 @@
       <workItem from="1729364688211" duration="3364000" />
       <workItem from="1729368758472" duration="4144000" />
       <workItem from="1729374215350" duration="12111000" />
+      <workItem from="1729426974007" duration="6628000" />
+      <workItem from="1729520406954" duration="4024000" />
+      <workItem from="1729525069924" duration="240000" />
     </task>
     <servers />
   </component>
@@ -107,5 +129,89 @@
   <component name="UnityUnitTestConfiguration" currentTestLauncher="EditMode" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItems/Blank.cs</url>
+          <line>15</line>
+          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItems/Blank.cs" initialLine="12" containingFunctionPresentation="method 'RemovePellet'">
+            <startOffsets>
+              <option value="371" />
+            </startOffsets>
+            <endOffsets>
+              <option value="393" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItems/Blank.cs</url>
+          <line>22</line>
+          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItems/Blank.cs" initialLine="20" containingFunctionPresentation="method 'DestroyPelletObject'">
+            <startOffsets>
+              <option value="527" />
+            </startOffsets>
+            <endOffsets>
+              <option value="543" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItems/Blank.cs</url>
+          <line>28</line>
+          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItems/Blank.cs" initialLine="26" containingFunctionPresentation="lambda expression inside method 'DestroyPelletObject'">
+            <startOffsets>
+              <option value="689" />
+            </startOffsets>
+            <endOffsets>
+              <option value="714" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItems/Wall.cs</url>
+          <line>12</line>
+          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItems/Wall.cs" initialLine="12" containingFunctionPresentation="method 'InitialiseWall'">
+            <startOffsets>
+              <option value="286" />
+            </startOffsets>
+            <endOffsets>
+              <option value="308" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Movement/MovementManager.cs</url>
+          <line>40</line>
+          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/Movement/MovementManager.cs" initialLine="31" containingFunctionPresentation="method 'MoveObjects'">
+            <startOffsets>
+              <option value="1123" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1182" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Movement/MovementManager.cs</url>
+          <line>62</line>
+          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/Movement/MovementManager.cs" initialLine="53" containingFunctionPresentation="method 'GetDestinations'">
+            <startOffsets>
+              <option value="1817" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1891" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

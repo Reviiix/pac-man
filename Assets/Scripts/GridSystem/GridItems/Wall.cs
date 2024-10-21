@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 
 namespace GridSystem.GridItems
@@ -5,17 +6,18 @@ namespace GridSystem.GridItems
     public class Wall : GridItem
     {
         #if UNITY_EDITOR
-        public void InitialiseWall()
+        public void InitialiseWall(GameObject pellet)
         {
             Initialise(Indices);
             Display.color = Color.black;
+            pelletPrefab = pellet;
         }
     
-        [ContextMenu(nameof(RevertToBlank))]
-        public void RevertToBlank()
+        [ContextMenu(nameof(ChangeToBlank))]
+        private void ChangeToBlank()
         {
-            var v = gameObject.AddComponent<Blank>();
-            v.InitialiseBlank();
+            var blank = gameObject.AddComponent<Blank>();
+            blank.InitialiseBlank(pelletPrefab);
             RemoveSelf();
         }
         #endif
