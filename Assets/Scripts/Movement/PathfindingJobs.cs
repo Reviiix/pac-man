@@ -4,7 +4,7 @@ using Unity.Jobs;
 using Unity.Mathematics;
 using UnityEngine;
 
-namespace Abstractions
+namespace Movement
 {
     /// <summary>
     /// The Job system requires a lot of boiler plate code but is the most optimised development strategy in Unity 202x.

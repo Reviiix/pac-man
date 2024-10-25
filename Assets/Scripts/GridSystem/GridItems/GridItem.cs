@@ -81,8 +81,6 @@ namespace GridSystem.GridItems
             previous = current;
             SetGCost(gCosts);
             CalculateFCost();
-            
-            
         }
         
         public void InitialisePathfindingValues()

@@ -2,7 +2,7 @@ using System;
 using GridSystem.GridItems;
 using Random = UnityEngine.Random;
 
-namespace Movement
+namespace Movement.MovingObjects
 {
     [Serializable]
     public class RandomEnemyMovement : MovingObject

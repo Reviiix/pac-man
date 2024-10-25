@@ -4,7 +4,7 @@ using GridSystem.GridItems;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace Movement
+namespace Movement.MovingObjects
 {
     [Serializable]
     public abstract class MovingObject
