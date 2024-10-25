@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Movement;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace GridSystem.GridItems
@@ -10,9 +11,14 @@ namespace GridSystem.GridItems
     [RequireComponent(typeof(Image))]
     public abstract class GridItem : MonoBehaviour
     {
-        public KeyValuePair<int, int> Indices { get;  private set; } //Key = X, Value = Y
+        public KeyValuePair<int, int> Indices { get; private set; } //Key = X, Value = Y
         protected Image Display;
-        private GridItem[] neighbors;
+        public GridItem previous;
+        #region Pathfinding
+        public int gCost;
+        public int fCost;
+        #endregion
+        public GridItem[] Neighbors { get; private set; }
         #if UNITY_EDITOR
         [SerializeField] protected GameObject pelletPrefab; //These references are only needed while building the Grid, no point in storing them in builds
         #endif
@@ -25,7 +31,7 @@ namespace GridSystem.GridItems
 
         public void SetNeighbors()
         {
-            neighbors = new[]
+            Neighbors = new[]
             {
                 //Row Above
                 GridManager.Instance.GetItem(new KeyValuePair<int, int>(Indices.Key-1,Indices.Value)),
@@ -35,7 +41,7 @@ namespace GridSystem.GridItems
                 //Row Below
                 GridManager.Instance.GetItem(new KeyValuePair<int, int>(Indices.Key+1,Indices.Value)),
             };
-            neighbors = neighbors.Where(x => x != null).ToArray(); //Remove edge piece neighbors
+            Neighbors = Neighbors.Where(x => x != null).ToArray(); //Remove edge piece neighbors
         }
 
         public GridItem GetAdjacentItem(MovementManager.Direction direction)
@@ -49,30 +55,62 @@ namespace GridSystem.GridItems
                 _ => throw new ArgumentOutOfRangeException(nameof(direction), direction, $"{nameof(direction)} is not accounted for in the switch statement")
             };
         }
-        
+
         private GridItem GetUpperNeighbor()
         {
-            return neighbors.FirstOrDefault(x => x.Indices.Value == Indices.Value - 1);
+            return Neighbors.FirstOrDefault(x => x.Indices.Value == Indices.Value - 1);
         }
         
         private GridItem GetLowerNeighbor()
         {
-            return neighbors.FirstOrDefault(x => x.Indices.Value == Indices.Value + 1);
+            return Neighbors.FirstOrDefault(x => x.Indices.Value == Indices.Value + 1);
         }
         
         private GridItem GetLeftNeighbor()
         {
-            return neighbors.FirstOrDefault(x => x.Indices.Key == Indices.Key - 1);
+            return Neighbors.FirstOrDefault(x => x.Indices.Key == Indices.Key - 1);
         }
         
         private GridItem GetRightNeighbor()
         {
-            return neighbors.FirstOrDefault(x => x.Indices.Key == Indices.Key + 1);
+            return Neighbors.FirstOrDefault(x => x.Indices.Key == Indices.Key + 1);
+        }
+        
+        public void CalculateGAndHCost(GridItem current, int gCosts)
+        {
+            previous = current;
+            SetGCost(gCosts);
+            CalculateFCost();
+            
+            
+        }
+        
+        public void InitialisePathfindingValues()
+        {
+            gCost = int.MaxValue;
+            CalculateFCost();
+            previous = null;
+        }
+        
+        public void SetPathFindingStartPosition()
+        {
+            gCost = 0;
+            CalculateFCost();
+        }
+        
+        private void CalculateFCost()
+        {
+            fCost = gCost + fCost;
+        }
+        
+        private void SetGCost(int cost)
+        {
+            gCost = cost;
         }
         
         public bool MultiplePathWaysAvailable()
         {
-            return neighbors.Count(x => x is Blank) > 2;
+            return Neighbors.Count(x => x is Blank) > 2;
         }
 
         protected void RemoveSelf()

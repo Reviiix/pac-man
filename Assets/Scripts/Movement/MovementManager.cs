@@ -1,5 +1,6 @@
 using System;
 using Abstractions;
+using GridSystem.GridItems;
 using UnityEngine;
 
 namespace Movement
@@ -10,16 +11,21 @@ namespace Movement
         private Transform[] objectsToMove;
         [SerializeField] private PlayerMovement player;
         [SerializeField] private RandomEnemyMovement randomEnemy;
+        [SerializeField] private SeekerEnemyMovement seekerEnemy;
+        private bool canMove;
 
         public void Initialise()
         {
             CreateCollection();
             player.Initialise(this);
             randomEnemy.Initialise(this);
+            seekerEnemy.Initialise(this);
+            canMove = true;
         }
 
         private void Update()
         {
+            if (!canMove) return;
             player.CheckForInput();
             MoveObjects();
         }
@@ -28,7 +34,8 @@ namespace Movement
         {
             player.CheckPosition();
             randomEnemy.CheckPosition();
-            MovementJobs.MoveObjects(objectsToMove, GetDestinations());
+            seekerEnemy.CheckPosition();
+            MovementJobs.MoveObjects(objectsToMove, CalculateDestinations());
         }
         
         /// <summary>
@@ -36,12 +43,17 @@ namespace Movement
         /// </summary>
         private void CreateCollection()
         {
-            objectsToMove = new[] { player.transform, randomEnemy.transform };
+            objectsToMove = new[] { player.transform, randomEnemy.transform, seekerEnemy.transform };
         }
 
-        private Vector3[] GetDestinations()
+        private Vector3[] CalculateDestinations()
         {
-            return new [] {player.GetDestination(), randomEnemy.GetDestination()};
+            return new [] {player.GetDestination(), randomEnemy.GetDestination(), seekerEnemy.GetDestination()};
+        }
+        
+        public GridItem GetPlayerTransform()
+        {
+            return player.GetNextPosition();
         }
 
         public static Direction GetOppositeDirection(Direction direction)
@@ -54,6 +66,16 @@ namespace Movement
                 Direction.Right => Direction.Left,
                 _ => throw new ArgumentOutOfRangeException(nameof(direction), direction, null)
             };
+        }
+
+        public static Direction GetDirectionOfNeighbor(GridItem original, GridItem neighbor)
+        {
+            if (neighbor.Indices.Key <= original.Indices.Key) return Direction.Left;
+            if (neighbor.Indices.Key >= original.Indices.Key) return Direction.Right;
+            if (neighbor.Indices.Value >= original.Indices.Value) return Direction.Up;
+            if (neighbor.Indices.Value <= original.Indices.Value) return Direction.Down;
+            Debug.Log($"{nameof(original)} has no neighbors");
+            return Direction.Left;
         }
 
         public enum Direction

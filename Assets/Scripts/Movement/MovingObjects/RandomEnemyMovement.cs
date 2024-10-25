@@ -20,12 +20,12 @@ namespace Movement
 
         private bool ShouldChangeDirection()
         {
-            return currentPosition.GetAdjacentItem(currentMovementDirection) is Wall || ShouldTakeAlternativeRoute();
+            return current.GetAdjacentItem(currentMovementDirection) is Wall || ShouldTakeAlternativeRoute();
         }
 
         private bool ShouldTakeAlternativeRoute()
         {
-            return Random.Range(0, directions.Length) == 0 && currentPosition.MultiplePathWaysAvailable();
+            return Random.Range(0, directions.Length) == 0 && current.MultiplePathWaysAvailable();
         }
 
         private MovementManager.Direction GetValidRandomDirection(MovementManager.Direction currentDirection)
@@ -36,7 +36,7 @@ namespace Movement
 
                 if (randomDirection == currentDirection) continue;
                 
-                if (currentPosition.GetAdjacentItem(randomDirection) is Wall) continue;
+                if (current.GetAdjacentItem(randomDirection) is Wall) continue;
 
                 return randomDirection;
             }

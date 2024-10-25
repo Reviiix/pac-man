@@ -11,20 +11,27 @@ namespace GridSystem
     [ExecuteInEditMode]
     public class GridManager : Singleton<GridManager>
     {
-        private bool generatingGrid;
+        private const int MinimumItems = 3;
+        private const int MaximumRows = 99;
+        private const int MaximumColumns = 99;
         private const string GridTag = "Grid";
-        private readonly List<GridItem> gridItems = new ();
+        public readonly List<GridItem> gridItems = new ();
+        private bool generatingGrid;
         private GameObject gridObject;
         [SerializeField] private Transform gridArea;
         [SerializeField] private GameObject gridPrefab;
         [SerializeField] private GameObject rowPrefab;
-        [FormerlySerializedAs("cardPrefab")] [SerializeField] private GameObject gridItemPrefabPrefab;
-        private const int MinimumItems = 3;
-        private const int MaximumRows = 99;
-        private const int MaximumColumns = 99;
+        [SerializeField] private GameObject gridItemPrefabPrefab;
         [SerializeField] [Range(MinimumItems, MaximumRows)] public int amountOfRows = MaximumRows / 2;
         [SerializeField] [Range(MinimumItems, MaximumColumns)] public int amountOfColumns = MaximumColumns / 2;
 
+        [ContextMenu(nameof(Initialise))]
+        public void Initialise()
+        {
+            SetGridItems();
+            SetNeighbors();
+        }
+        
         public GridItem GetItem(KeyValuePair<int, int> indices)
         {
             var x = indices.Key; //Cache for LINQs hidden multiple access.
@@ -49,13 +56,6 @@ namespace GridSystem
             amountOfRows = MaximumRows / 2;
             amountOfColumns = MaximumColumns / 2;
             GenerateGrid();
-        }
-        
-        [ContextMenu(nameof(Initialise))]
-        public void Initialise()
-        {
-            SetGridItems();
-            SetNeighbors();
         }
         #endif 
         
@@ -105,7 +105,7 @@ namespace GridSystem
         private void SetGridItems()
         {
             gridItems.Clear();
-            gridObject = GameObject.FindWithTag(GridTag);
+            gridObject = GameObject.FindWithTag(GridTag); //FindWithTag because caches can be reset in and out of play mode.
             for (var i = 0; i < amountOfRows; i++)
             {
                 for (var j = 0; j < amountOfColumns; j++)

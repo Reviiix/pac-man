@@ -7,17 +7,16 @@ using UnityEngine.Serialization;
 namespace Movement
 {
     [Serializable]
-    public class MovingObject
+    public abstract class MovingObject
     {
         private const float NewPositionDistanceTolerance = 0.01f;
         private const int CurrentPositionDistanceTolerance = 10;
         public Transform transform;
-        [SerializeField] private int speed;
-        [SerializeField] protected GridItem currentPosition;
-        [SerializeField] private GridItem nextPosition;
+        [SerializeField] protected int speed;
+        [FormerlySerializedAs("currentPosition")] [SerializeField] protected GridItem current;
+        [FormerlySerializedAs("nextPosition")] [SerializeField] protected GridItem next;
         private WaitUntil waitUntilReachedCurrentTarget;
-        private bool canMove;
-        private bool moving;
+        protected bool Moving;
         private Coroutine directionChange;
         [FormerlySerializedAs("currentDirection")] public MovementManager.Direction currentMovementDirection;
         private MonoBehaviour coroutiner;
@@ -25,16 +24,14 @@ namespace Movement
         public void Initialise(MonoBehaviour coroutineHandler)
         {
             coroutiner = coroutineHandler;
-            waitUntilReachedCurrentTarget = new WaitUntil(() => !moving);
-            SetNextPosition(GetNextPosition(currentMovementDirection));
-            canMove = true;
+            waitUntilReachedCurrentTarget = new WaitUntil(() => !Moving);
+            SetNextPosition(GetAdjacentItem(currentMovementDirection));
         }
         
-        public void CheckPosition()
+        public virtual void CheckPosition()
         {
-            if (!canMove) return;
-            if (nextPosition is Wall) return;
-            moving = true;
+            if (next is Wall) return;
+            Moving = true;
             if (NewPositionReached())
             {
                 OnDestinationReached();
@@ -43,15 +40,15 @@ namespace Movement
         
         protected virtual void OnDestinationReached()
         {
-            SetCurrentPosition(nextPosition);
-            MoveToCurrentGridItem();
-            SetNextPosition(GetNextPosition(currentMovementDirection));
-            moving = false;
+            SetCurrentPosition(next);
+            SnapToExactCurrentGridItem();
+            SetNextPosition(GetAdjacentItem(currentMovementDirection));
+            Moving = false;
         }
 
-        private void MoveToCurrentGridItem()
+        private void SnapToExactCurrentGridItem()
         {
-            transform.position = currentPosition.transform.position;
+            transform.position = current.transform.position;
         }
 
         public void DetermineDirectionChange(KeyCode key)
@@ -73,16 +70,15 @@ namespace Movement
 
         protected void ChangeDirection(MovementManager.Direction direction)
         {
-            if (currentPosition.GetAdjacentItem(direction) is Wall) return;
+            if (current.GetAdjacentItem(direction) is Wall) return;
             currentMovementDirection = direction;
-            SetCurrentPosition(currentPosition);
-            SetNextPosition(currentPosition.GetAdjacentItem(currentMovementDirection));
+            SetCurrentPosition(current);
+            SetNextPosition(current.GetAdjacentItem(currentMovementDirection));
         }
         
         public Vector3 GetDestination()
         {
-            var targetDestination = nextPosition.transform.position;
-            return Vector3.MoveTowards(transform.position, targetDestination, speed * Time.deltaTime);
+            return Vector3.MoveTowards(transform.position, next.transform.position, speed * Time.deltaTime);
         }
 
         private MovementManager.Direction GetDirectionFromKeyCode(KeyCode key)
@@ -99,34 +95,39 @@ namespace Movement
 
         private bool CloseToCurrentGridItem()
         {
-            return Vector3.Distance(transform.position, currentPosition.transform.position) < CurrentPositionDistanceTolerance;
+            return Vector3.Distance(transform.position, current.transform.position) <= CurrentPositionDistanceTolerance;
         }
 
-        private bool NewPositionReached()
+        protected virtual bool NewPositionReached()
         {
-            return Vector3.Distance(transform.position, nextPosition.transform.position) < NewPositionDistanceTolerance;
+            return Vector3.Distance(transform.position, next.transform.position) <= NewPositionDistanceTolerance;
         }
 
         private void SetCurrentPosition(GridItem position)
         {
-            currentPosition = position;
+            current = position;
         }
         
         private void SetNextPosition(GridItem position)
         {
-            nextPosition = position;
+            next = position;
         }
 
-        private GridItem GetNextPosition(MovementManager.Direction direction)
+        private GridItem GetAdjacentItem(MovementManager.Direction direction)
         {
-            var gridItem = nextPosition.GetAdjacentItem(direction);
-            return gridItem is Wall ? currentPosition : gridItem;
+            var gridItem = next.GetAdjacentItem(direction);
+            return gridItem is Wall ? current : gridItem;
         }
         
         private IEnumerator WaitUntilTargetReached(Action callBack)
         {
             yield return waitUntilReachedCurrentTarget;
             callBack();
+        }
+
+        public GridItem GetNextPosition()
+        {
+            return next;
         }
     }
 }

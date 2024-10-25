@@ -2,15 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c58d8378-5f45-4888-8846-57f9124cd50c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Movement/MovingObjects/SeekerEnemyMovement.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Movement/MovingObjects/SeekerEnemyMovement.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Pathfinder.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Pathfinder.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.pac-man/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.pac-man/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/GridSystem/GridItem.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/GridSystem/GridItem.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Levels/ClassicPacMan.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Levels/ClassicPacMan.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Pacman.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Pacman.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItems/Blank.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItems/Blank.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItems/GridItem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItems/GridItem.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItems/Wall.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItems/Wall.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GridSystem/GridManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GridSystem/GridManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Movement/MovementManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Movement/MovementManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Movement/MovingObjects/MovingObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Movement/MovingObjects/MovingObject.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Movement/MovingObjects/RandomEnemyMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Movement/MovingObjects/RandomEnemyMovement.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ProjectInitializer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ProjectInitializer.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,12 +26,16 @@
     <setting file="file://$PROJECT_DIR$/../kong/Assets/Scripts/Player/PlayerMovement.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItems/Blank.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItems/Wall.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Pathfinder.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/PathfindingJobs.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/ProjectInitializer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/219b9aa5d50c4ce08e2a41cea5b36ecd110400/15/60514b49/Enumerable.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/3ff87c59c5ac40d69c02c27bc5571d641dd800/73/0d984a5b/Transform.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/612b34e14c5a4a38829eadeb01924d451f2c00/1a/583959f3/LayoutDataStore.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7c71ea008dbd49c384e65c290b343b8d9afa00/1f/8631d3cb/ComponentUtility.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/Library/Unity/cache/packages/packages.unity.com/com.unity.2d.aseprite@1.1.6/Editor/AsepriteImporterAPIs.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/Library/Unity/cache/packages/packages.unity.com/com.unity.2d.aseprite@1.1.6/Editor/AsepriteSpriteEditorDataProvider.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/Library/Unity/cache/packages/packages.unity.com/com.unity.2d.aseprite@1.1.6/Editor/Common/ImagePacker/ImagePackNode.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/Library/Unity/cache/packages/packages.unity.com/com.unity.2d.aseprite@1.1.6/Editor/Common/ImagePacker/ImagePacker.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/Library/Unity/cache/packages/packages.unity.com/com.unity.2d.aseprite@1.1.6/Editor/Common/InternalBridge/ModelPreviewer.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/Library/Unity/cache/packages/packages.unity.com/com.unity.2d.aseprite@1.1.6/Editor/Tasks/CellTasks.cs" root0="SKIP_HIGHLIGHTING" />
@@ -119,6 +127,10 @@
       <workItem from="1729426974007" duration="6628000" />
       <workItem from="1729520406954" duration="4024000" />
       <workItem from="1729525069924" duration="240000" />
+      <workItem from="1729765857263" duration="10680000" />
+      <workItem from="1729853047383" duration="9956000" />
+      <workItem from="1729863165651" duration="11955000" />
+      <workItem from="1729885765743" duration="1256000" />
     </task>
     <servers />
   </component>
@@ -173,43 +185,69 @@
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItems/Wall.cs</url>
-          <line>12</line>
-          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItems/Wall.cs" initialLine="12" containingFunctionPresentation="method 'InitialiseWall'">
-            <startOffsets>
-              <option value="286" />
-            </startOffsets>
-            <endOffsets>
-              <option value="308" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/Movement/MovementManager.cs</url>
-          <line>40</line>
-          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/Movement/MovementManager.cs" initialLine="31" containingFunctionPresentation="method 'MoveObjects'">
-            <startOffsets>
-              <option value="1123" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1182" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Movement/MovementManager.cs</url>
-          <line>62</line>
+          <line>84</line>
           <properties documentPath="$PROJECT_DIR$/Assets/Scripts/Movement/MovementManager.cs" initialLine="53" containingFunctionPresentation="method 'GetDestinations'">
             <startOffsets>
-              <option value="1817" />
+              <option value="-1" />
             </startOffsets>
             <endOffsets>
-              <option value="1891" />
+              <option value="-1" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/GridSystem/GridManager.cs</url>
+          <line>84</line>
+          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/GridSystem/GridManager.cs" initialLine="90" containingFunctionPresentation="method 'CreateGrid'">
+            <startOffsets>
+              <option value="3052" />
+            </startOffsets>
+            <endOffsets>
+              <option value="3076" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="26" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Pathfinder.cs</url>
+          <line>50</line>
+          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/Pathfinder.cs" initialLine="68" containingFunctionPresentation="method 'FindPath'">
+            <startOffsets>
+              <option value="1459" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1471" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Movement/MovingObjects/SeekerEnemyMovement.cs</url>
+          <line>31</line>
+          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/Movement/MovingObjects/SeekerEnemyMovement.cs" initialLine="19" containingFunctionPresentation="method 'UpdatePath'">
+            <startOffsets>
+              <option value="792" />
+            </startOffsets>
+            <endOffsets>
+              <option value="814" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="36" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Pathfinder.cs</url>
+          <line>19</line>
+          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/Pathfinder.cs" initialLine="20" containingFunctionPresentation="method 'Initialise'">
+            <startOffsets>
+              <option value="522" />
+            </startOffsets>
+            <endOffsets>
+              <option value="542" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="38" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
