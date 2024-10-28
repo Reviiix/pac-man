@@ -8,6 +8,9 @@ using UnityEngine;
 
 namespace Movement
 {
+    /// <summary>
+    /// Generate a path towards the the target using the A* algorithm.
+    /// </summary>
     public class Pathfinder : Singleton<Pathfinder>
     {
         private static GridManager _grid;

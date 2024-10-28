@@ -16,18 +16,12 @@ namespace Movement.MovingObjects
         protected override void OnDestinationReached()
         {
             base.OnDestinationReached();
-            UpdateNextPosition();
+            UpdateNext();
         }
-
-        /// <summary>
-        /// Generate a path towards the the target using the A* algorithm.
-        /// </summary>
-        private void UpdateNextPosition()
+        
+        private void UpdateNext()
         {
-            if (!current.MultiplePathWaysAvailable())
-            {
-                UpdatePath();
-            }
+            UpdatePath();
             if (PathComplete(path)) return;
             path.Dequeue(); //Current position
             next = path.Dequeue();

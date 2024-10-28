@@ -26,7 +26,7 @@ namespace Abstractions
             }
             
             //Create job handle and pass in values.
-            var jobHandle = new MoveMultipleObjectsTowardsPosition
+            var jobHandle = new MoveMultipleObjectsToPosition
             {
                 PositionsOfObjectsToMove = objectPositions,
                 PositionsToMoveTo = endPositions,
@@ -48,7 +48,7 @@ namespace Abstractions
         }
 
         [BurstCompile]
-        private struct MoveMultipleObjectsTowardsPosition : IJobParallelFor
+        private struct MoveMultipleObjectsToPosition : IJobParallelFor
         {
             public NativeArray<float3> PositionsOfObjectsToMove;
             public NativeArray<float3> PositionsToMoveTo;
