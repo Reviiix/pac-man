@@ -13,5 +13,6 @@ public class ProjectInitializer : MonoBehaviour
         GridManager.Instance.Initialise();
         MovementManager.Instance.Initialise();
         Pathfinder.Initialise(GridManager.Instance);
+        PelletManager.Instance.Initialise();
     }
 }

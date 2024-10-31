@@ -11,13 +11,19 @@ namespace GridSystem.GridItems
         [ContextMenu(nameof(RemovePellet))]
         private void RemovePellet()
         {
-            if (!hasPellet) return;
+            // if (!hasPellet) return;
             hasPellet = false;
             DestroyPelletObject();
+            PelletManager.Instance.RemovePelletFromList(this);
         }
 
         private void DestroyPelletObject()
         {
+            if (pellet == null)
+            {
+                pellet = transform.GetChild(0).gameObject;
+                if (pellet == null) return;
+            }
             if (Application.isPlaying)
             {
                 Destroy(pellet);
@@ -51,6 +57,8 @@ namespace GridSystem.GridItems
             hasPellet = true;
             var parent = transform;
             pellet = Instantiate(pelletPrefab, parent.position, Quaternion.identity, parent);
+            pellet.GetComponent<Pellet>().Initialise(this);
+            PelletManager.Instance.AddPelletToList(this);
         }
     
         [ContextMenu(nameof(ChangeToWall))]
