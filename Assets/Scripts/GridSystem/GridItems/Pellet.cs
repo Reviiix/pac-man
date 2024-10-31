@@ -1,4 +1,5 @@
 using System;
+using GameStates;
 using GridSystem;
 using GridSystem.GridItems;
 using UnityEngine;
@@ -24,7 +25,8 @@ public class Pellet : MonoBehaviour
 
     private void PelletHit()
     {
-        Debug.Log("Hah`ahahahakbdiyvwqe");
+        Debug.Log("Pellet Hit");
+        ScoreManager.Instance.IncrementPelletsHit();
         Destroy(gameObject);
     }
 }

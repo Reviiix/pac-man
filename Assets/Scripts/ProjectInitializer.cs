@@ -1,3 +1,4 @@
+using GameStates;
 using GridSystem;
 using Movement;
 using UnityEngine;
@@ -14,5 +15,6 @@ public class ProjectInitializer : MonoBehaviour
         MovementManager.Instance.Initialise();
         Pathfinder.Initialise(GridManager.Instance);
         PelletManager.Instance.Initialise();
+        ScoreManager.Instance.Initialise();
     }
 }

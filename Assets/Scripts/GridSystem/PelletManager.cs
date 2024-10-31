@@ -12,10 +12,11 @@ namespace GridSystem
     public class PelletManager : Singleton<PelletManager>
     {
         [SerializeField] private List<Blank> allActivePellets = new List<Blank>();
-        
+        public int numberOfPellets { get; private set; }
+
         public void Initialise()
         {
-            
+            numberOfPellets = allActivePellets.Count;
         }
 
         public void AddPelletToList(Blank gridItem)
