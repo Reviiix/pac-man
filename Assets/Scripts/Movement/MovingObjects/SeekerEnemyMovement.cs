@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Mime;
 using GridSystem.GridItems;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 namespace Movement.MovingObjects
@@ -78,39 +80,44 @@ namespace Movement.MovingObjects
         
         private GridItem GetCutOffTarget()
         {
-            var target = MovementManager.Instance.GetPlayerTransform();
+            var cutoffTarget = MovementManager.Instance.GetPlayerTransform();
             var direction = MovementManager.Instance.GetPlayerDirection();
-            var spacesAhead = 4;
+            var previousDirection = direction;
+            var spacesAhead = 3;
 
             for (var i = 0; i < spacesAhead; i++)
             {
-                if (target.GetAdjacentItem(direction) is Wall)
+                if (cutoffTarget.GetAdjacentItem(direction) is Wall)
                 {
                     // Setting direction priorities
-                    if (target.GetAdjacentItem(MovementManager.Direction.Up) is not Wall)
+                    if (cutoffTarget.GetAdjacentItem(MovementManager.Direction.Up) is not Wall && previousDirection != MovementManager.Direction.Down)
                     {
-                        target = target.GetAdjacentItem(MovementManager.Direction.Up);
+                        cutoffTarget = cutoffTarget.GetAdjacentItem(MovementManager.Direction.Up);
+                        previousDirection = MovementManager.Direction.Up;
                     }
-                    else if (target.GetAdjacentItem(MovementManager.Direction.Down) is not Wall)
+                    else if (cutoffTarget.GetAdjacentItem(MovementManager.Direction.Down) is not Wall && previousDirection != MovementManager.Direction.Up)
                     {
-                        target = target.GetAdjacentItem(MovementManager.Direction.Down);
+                        cutoffTarget = cutoffTarget.GetAdjacentItem(MovementManager.Direction.Down);
+                        previousDirection = MovementManager.Direction.Down;
                     }
-                    else if (target.GetAdjacentItem(MovementManager.Direction.Left) is not Wall)
+                    else if (cutoffTarget.GetAdjacentItem(MovementManager.Direction.Left) is not Wall && previousDirection != MovementManager.Direction.Right)
                     {
-                        target = target.GetAdjacentItem(MovementManager.Direction.Left);
+                        cutoffTarget = cutoffTarget.GetAdjacentItem(MovementManager.Direction.Left);
+                        previousDirection = MovementManager.Direction.Left;
                     }
-                    else if (target.GetAdjacentItem(MovementManager.Direction.Right) is not Wall)
+                    else if (cutoffTarget.GetAdjacentItem(MovementManager.Direction.Right) is not Wall && previousDirection != MovementManager.Direction.Left)
                     {
-                        target = target.GetAdjacentItem(MovementManager.Direction.Right);
+                        cutoffTarget = cutoffTarget.GetAdjacentItem(MovementManager.Direction.Right);
+                        previousDirection = MovementManager.Direction.Right;
                     }
                 }
                 else
                 {
-                    target = target.GetAdjacentItem(direction);
+                    cutoffTarget = cutoffTarget.GetAdjacentItem(direction);
                 }
             }
 
-            return target;
+            return cutoffTarget;
         }
 
         /// <summary>
@@ -125,6 +132,7 @@ namespace Movement.MovingObjects
                     break;
                 case SeekerType.CutOff:
                     target = GetCutOffTarget();
+                    MovementManager.Instance.targetDebug.position = target.transform.position;
                     break;
                 default:
                     target = MovementManager.Instance.GetPlayerTransform();

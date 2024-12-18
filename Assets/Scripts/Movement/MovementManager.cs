@@ -3,6 +3,7 @@ using Abstractions;
 using GridSystem.GridItems;
 using Movement.MovingObjects;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Movement
 {
@@ -13,6 +14,8 @@ namespace Movement
         [SerializeField] private PlayerMovement player;
         [SerializeField] private SeekerEnemyMovement[] seekerEnemy;
         private bool canMove;
+        
+        public Transform targetDebug;
 
         public void Initialise()
         {
