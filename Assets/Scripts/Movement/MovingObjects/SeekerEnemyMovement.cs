@@ -86,6 +86,7 @@ namespace Movement.MovingObjects
             {
                 if (target.GetAdjacentItem(direction) is Wall)
                 {
+                    // Setting direction priorities
                     if (target.GetAdjacentItem(MovementManager.Direction.Up) is not Wall)
                     {
                         target = target.GetAdjacentItem(MovementManager.Direction.Up);
@@ -93,6 +94,14 @@ namespace Movement.MovingObjects
                     else if (target.GetAdjacentItem(MovementManager.Direction.Down) is not Wall)
                     {
                         target = target.GetAdjacentItem(MovementManager.Direction.Down);
+                    }
+                    else if (target.GetAdjacentItem(MovementManager.Direction.Left) is not Wall)
+                    {
+                        target = target.GetAdjacentItem(MovementManager.Direction.Left);
+                    }
+                    else if (target.GetAdjacentItem(MovementManager.Direction.Right) is not Wall)
+                    {
+                        target = target.GetAdjacentItem(MovementManager.Direction.Right);
                     }
                 }
                 else
