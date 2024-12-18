@@ -85,6 +85,11 @@ namespace Movement
             return player.GetNextPosition();
         }
 
+        public Direction GetPlayerDirection()
+        {
+            return player.currentMovementDirection;
+        }
+
         public static Direction GetOppositeDirection(Direction direction)
         {
             return direction switch
