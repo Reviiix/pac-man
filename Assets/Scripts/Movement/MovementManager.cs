@@ -11,16 +11,18 @@ namespace Movement
         public static readonly Direction[] Directions = { Direction.Up, Direction.Down, Direction.Left, Direction.Right };
         private Transform[] objectsToMove;
         [SerializeField] private PlayerMovement player;
-        [SerializeField] private RandomEnemyMovement randomEnemy;
-        [SerializeField] private SeekerEnemyMovement seekerEnemy;
+        [SerializeField] private SeekerEnemyMovement[] seekerEnemy;
         private bool canMove;
 
         public void Initialise()
         {
             CreateCollection();
             player.Initialise(this);
-            randomEnemy.Initialise(this);
-            seekerEnemy.Initialise(this);
+            foreach (var seeker in seekerEnemy)
+            {
+                seeker.Initialise(this);
+            }
+            
             canMove = true;
         }
 
@@ -34,8 +36,10 @@ namespace Movement
         private void MoveObjects()
         {
             player.CheckPosition();
-            randomEnemy.CheckPosition();
-            seekerEnemy.CheckPosition();
+            foreach (var seeker in seekerEnemy)
+            {
+                seeker.CheckPosition();
+            }
             MovementJobs.MoveObjects(objectsToMove, CalculateDestinations());
         }
         
@@ -44,12 +48,36 @@ namespace Movement
         /// </summary>
         private void CreateCollection()
         {
-            objectsToMove = new[] { player.transform, randomEnemy.transform, seekerEnemy.transform };
+            // objectsToMove = new[] { player.transform, randomEnemy.transform, seekerEnemy.transform };
+            objectsToMove = new Transform[1 + seekerEnemy.Length];
+            objectsToMove[0] = player.transform;
+            for (var i = 0; i < seekerEnemy.Length; i++)
+            {
+                objectsToMove[i + 1] = seekerEnemy[i].transform;
+            }
         }
 
         private Vector3[] CalculateDestinations()
         {
-            return new [] {player.GetDestination(), randomEnemy.GetDestination(), seekerEnemy.GetDestination()};
+            var array = new Vector3[1 + seekerEnemy.Length];
+
+            for (var i = 0; i < array.Length; i++)
+            {
+                var movement = new Vector3();
+                
+                if (i == 0)
+                {
+                    movement = player.GetDestination();
+                }
+                else
+                {
+                    movement = seekerEnemy[i - 1].GetDestination();
+                }
+
+                array[i] = movement;
+            }
+            
+            return array;
         }
         
         public GridItem GetPlayerTransform()

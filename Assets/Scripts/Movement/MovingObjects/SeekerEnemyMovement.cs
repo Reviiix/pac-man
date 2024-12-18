@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using GridSystem.GridItems;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Movement.MovingObjects
 {
@@ -11,8 +12,18 @@ namespace Movement.MovingObjects
     {
         [SerializeField] private Pathfinder pathFinder;
         private Queue<GridItem> path;
-        public GridItem target;
-    
+        public GridItem target { get; private set; }
+        public SeekerType type;
+        
+        private readonly MovementManager.Direction[] randomDirections = MovementManager.Directions;
+
+        public enum SeekerType
+        {
+            Chase,
+            CutOff,
+            Random
+        }
+
         protected override void OnDestinationReached()
         {
             base.OnDestinationReached();
@@ -21,11 +32,47 @@ namespace Movement.MovingObjects
         
         private void UpdateNext()
         {
-            UpdatePath();
-            if (PathComplete(path)) return;
-            path.Dequeue(); //Current position
-            next = path.Dequeue();
-            currentMovementDirection = MovementManager.GetDirectionOfNeighbor(current, next);
+
+            switch (type)
+            {
+                case SeekerType.Chase:
+                    UpdatePath();
+                    if (PathComplete(path)) return;
+                    path.Dequeue(); //Current position
+                    next = path.Dequeue();
+                    currentMovementDirection = MovementManager.GetDirectionOfNeighbor(current, next);
+                    break;
+                case SeekerType.Random:
+                    if (ShouldChangeDirection())
+                    {
+                        ChangeDirection(GetValidRandomDirection(currentMovementDirection));   
+                    }
+                    break;
+            }
+        }
+        
+        private bool ShouldChangeDirection()
+        {
+            return current.GetAdjacentItem(currentMovementDirection) is Wall || ShouldTakeAlternativeRoute();
+        }
+        
+        private bool ShouldTakeAlternativeRoute()
+        {
+            return Random.Range(0, randomDirections.Length) == 0 && current.MultiplePathWaysAvailable();
+        }
+        
+        private MovementManager.Direction GetValidRandomDirection(MovementManager.Direction currentDirection)
+        {
+            while (true)
+            {
+                var randomDirection = randomDirections[Random.Range(0, randomDirections.Length)];
+
+                if (randomDirection == currentDirection) continue;
+                
+                if (current.GetAdjacentItem(randomDirection) is Wall) continue;
+
+                return randomDirection;
+            }
         }
 
         /// <summary>
