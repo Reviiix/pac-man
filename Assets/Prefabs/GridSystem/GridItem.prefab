@@ -88,4 +88,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50a82db477cce492ea6d449bc35f0d8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  previous: {fileID: 0}
+  gCost: 0
+  fCost: 0
   pelletPrefab: {fileID: 3035900179511735125, guid: f8624777aa4cf4d15a51cdc663afd8e6, type: 3}
+  bonusItemPrefab: {fileID: 7489895985371718244, guid: 7f4fb71a7932b47eda12b16a61a98b1c, type: 3}
