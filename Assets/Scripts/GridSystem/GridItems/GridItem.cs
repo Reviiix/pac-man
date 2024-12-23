@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Movement;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace GridSystem.GridItems
@@ -21,6 +20,7 @@ namespace GridSystem.GridItems
         public GridItem[] Neighbors { get; private set; }
         #if UNITY_EDITOR
         [SerializeField] protected GameObject pelletPrefab; //These references are only needed while building the Grid, no point in storing them in builds
+        [SerializeField] protected GameObject bonusItemPrefab; 
         #endif
 
         public void Initialise(KeyValuePair<int, int> indices)
