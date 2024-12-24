@@ -966,7 +966,7 @@ MonoBehaviour:
     speed: 100
     current: {fileID: 0}
     next: {fileID: 1959838732}
-    currentMovementDirection: 2
+    currentMovementDirection: 3
   seekerEnemy:
   - transform: {fileID: 448626909}
     speed: 100
@@ -2794,7 +2794,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1823455456}
   m_Layer: 0
-  m_Name: GRP_GmeManagers
+  m_Name: GRP_GameManagers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
