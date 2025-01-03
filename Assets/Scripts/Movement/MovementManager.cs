@@ -15,8 +15,6 @@ namespace Movement
         [SerializeField] private PlayerMovement player;
         [SerializeField] private SeekerEnemyMovement[] seekerEnemy;
         private bool canMove;
-        
-        public Transform targetDebug;
 
         public void Initialise()
         {
@@ -84,14 +82,14 @@ namespace Movement
             return array;
         }
         
-        public GridItem GetPlayerTransform()
+        public GridItem GetPlayersNextPosition()
         {
             return player.GetNextPosition();
         }
         
         public GridItem GetInversePlayerTransform()
         {
-            return GetInverseGridItem(GetPlayerTransform());
+            return GetInverseGridItem(GetPlayersNextPosition());
         }
         
         private static GridItem GetInverseGridItem(GridItem original)

@@ -13,15 +13,16 @@ namespace Movement.MovingObjects
         private const int CurrentPositionDistanceTolerance = 10;
         public Transform transform;
         [SerializeField] protected int speed;
-        [FormerlySerializedAs("currentPosition")] [SerializeField] protected GridItem current;
-        [FormerlySerializedAs("nextPosition")] [SerializeField] protected GridItem next;
+        [SerializeField] protected GridItem current;
+        [SerializeField] protected GridItem next;
         private WaitUntil waitUntilReachedCurrentTarget;
         protected bool Moving;
         private Coroutine directionChange;
-        [FormerlySerializedAs("currentDirection")] public MovementManager.Direction currentMovementDirection;
+        public MovementManager.Direction currentMovementDirection;
         private MonoBehaviour coroutiner;
+        [SerializeField] protected Transform targetDebug;
         
-        public void Initialise(MonoBehaviour coroutineHandler)
+        public virtual void Initialise(MonoBehaviour coroutineHandler)
         {
             coroutiner = coroutineHandler;
             waitUntilReachedCurrentTarget = new WaitUntil(() => !Moving);

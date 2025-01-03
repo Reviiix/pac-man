@@ -1,10 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Net.Mime;
 using GridSystem.GridItems;
 using UnityEngine;
-using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 namespace Movement.MovingObjects
@@ -24,6 +22,16 @@ namespace Movement.MovingObjects
             CutOff,
             Random,
             Scared
+        }
+
+        public override void Initialise(MonoBehaviour coroutineHandler)
+        {
+            base.Initialise(coroutineHandler);
+            if (type == SeekerType.Scared)
+            {
+                LogManager.Log("You are using an enemy type that is dependant on a horizontally symmetrical map");
+            }
+            targetDebug.gameObject.SetActive(ProjectSettings.DebugSettings.DebugEnemyTargets);
         }
 
         protected override void OnDestinationReached()
@@ -90,7 +98,7 @@ namespace Movement.MovingObjects
         
         private GridItem GetCutOffTarget()
         {
-            var cutoffTarget = MovementManager.Instance.GetPlayerTransform();
+            var cutoffTarget = MovementManager.Instance.GetPlayersNextPosition();
             var direction = MovementManager.Instance.GetPlayerDirection();
             var previousDirection = direction;
             var spacesAhead = 3;
@@ -138,25 +146,22 @@ namespace Movement.MovingObjects
             switch (type)
             {
                 case SeekerType.Chase:
-                    Target = MovementManager.Instance.GetPlayerTransform();
+                    Target = MovementManager.Instance.GetPlayersNextPosition();
                     break;
                 case SeekerType.CutOff:
                     Target = GetCutOffTarget();
-                    if (ProjectSettings.DebugTools)
-                    {
-                        //MovementManager.Instance.targetDebug.position = target.transform.position;
-                    }
                     break;
                 case SeekerType.Scared:
                     Target = GetScaredTarget();
-                    if (ProjectSettings.DebugTools)
-                    {
-                        MovementManager.Instance.targetDebug.position = Target.transform.position;
-                    }
                     break;
             }
             
             path  = pathFinder.FindPath(current, Target);
+            
+            if (ProjectSettings.DebugSettings.DebugEnemyTargets)
+            {
+                targetDebug.position = Target.transform.position;
+            }
         }
 
         private bool PathComplete(ICollection p)
