@@ -89,6 +89,10 @@ namespace Movement.MovingObjects
             }
         }
 
+        /// <summary>
+        /// If path towards player is greater than X spaces away, seek the player out.
+        /// if the path towards the player is less than X spaces away then retreat to the opposite side of the board.
+        /// </summary>
         private GridItem GetScaredTarget()
         {
             const int distanceBeforeRetreat = 9;
@@ -96,6 +100,9 @@ namespace Movement.MovingObjects
             return pathFinder.FindPath(current, player).Count <= distanceBeforeRetreat ? MovementManager.Instance.GetInversePlayerTransform() : player;
         }
         
+        /// <summary>
+        /// Predict where the player is moving too and seek out the space X amount of spaces in front of them.
+        /// </summary>
         private GridItem GetCutOffTarget()
         {
             var cutoffTarget = MovementManager.Instance.GetPlayersNextPosition();
