@@ -30,7 +30,7 @@ namespace GridSystem.GridItems
             Display = GetComponent<Image>();
             Indices = indices;
 
-            if (ProjectSettings.DebugTools)
+            if (ProjectSettings.DebugSettings.DebugGridIndices)
             {
                 debugIndices.text = $"{Indices.Key},{Indices.Value}";
             }
