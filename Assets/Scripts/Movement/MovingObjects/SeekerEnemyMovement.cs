@@ -13,17 +13,17 @@ namespace Movement.MovingObjects
     public class SeekerEnemyMovement : MovingObject
     {
         [SerializeField] private Pathfinder pathFinder;
-        private Queue<GridItem> path;
-        public GridItem target { get; private set; }
+        private Queue<GridItem> path = new ();
+        public GridItem Target { get; private set; }
         public SeekerType type;
-        
         private readonly MovementManager.Direction[] randomDirections = MovementManager.Directions;
 
         public enum SeekerType
         {
             Chase,
             CutOff,
-            Random
+            Random,
+            Scared
         }
 
         protected override void OnDestinationReached()
@@ -39,6 +39,7 @@ namespace Movement.MovingObjects
             {
                 case SeekerType.Chase:
                 case SeekerType.CutOff:
+                case SeekerType.Scared:
                     UpdatePath();
                     if (PathComplete(path)) return;
                     path.Dequeue(); //Current position
@@ -51,6 +52,8 @@ namespace Movement.MovingObjects
                         ChangeDirection(GetValidRandomDirection(currentMovementDirection));   
                     }
                     break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
         }
         
@@ -76,6 +79,12 @@ namespace Movement.MovingObjects
 
                 return randomDirection;
             }
+        }
+
+        private GridItem GetScaredTarget()
+        {
+            const int distanceBeforeRetreat = 5;
+            return path.Count <= distanceBeforeRetreat ? MovementManager.Instance.GetInversePlayerTransform() : MovementManager.Instance.GetPlayerTransform();
         }
         
         private GridItem GetCutOffTarget()
@@ -128,18 +137,25 @@ namespace Movement.MovingObjects
             switch (type)
             {
                 case SeekerType.Chase:
-                    target = MovementManager.Instance.GetPlayerTransform();
+                    Target = MovementManager.Instance.GetPlayerTransform();
                     break;
                 case SeekerType.CutOff:
-                    target = GetCutOffTarget();
-                    MovementManager.Instance.targetDebug.position = target.transform.position;
+                    Target = GetCutOffTarget();
+                    if (ProjectSettings.DebugTools)
+                    {
+                        //MovementManager.Instance.targetDebug.position = target.transform.position;
+                    }
                     break;
-                default:
-                    target = MovementManager.Instance.GetPlayerTransform();
+                case SeekerType.Scared:
+                    Target = GetScaredTarget();
+                    if (ProjectSettings.DebugTools)
+                    {
+                        MovementManager.Instance.targetDebug.position = Target.transform.position;
+                    }
                     break;
             }
             
-            path  = pathFinder.FindPath(current, target);
+            path  = pathFinder.FindPath(current, Target);
         }
 
         private bool PathComplete(ICollection p)

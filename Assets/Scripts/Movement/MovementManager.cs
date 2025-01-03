@@ -1,9 +1,10 @@
 using System;
+using System.Collections.Generic;
 using Abstractions;
+using GridSystem;
 using GridSystem.GridItems;
 using Movement.MovingObjects;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Movement
 {
@@ -86,6 +87,39 @@ namespace Movement
         public GridItem GetPlayerTransform()
         {
             return player.GetNextPosition();
+        }
+        
+        public GridItem GetInversePlayerTransform()
+        {
+            return GetInverseGridItem(GetPlayerTransform());
+        }
+        
+        private static GridItem GetInverseGridItem(GridItem original)
+        {
+            return GridManager.Instance.GetItem(new KeyValuePair<int, int>(GetInverseX(original.Indices.Key, GridManager.Instance.amountOfColumns / 2), original.Indices.Value));
+        }
+
+        private static int GetInverseX(int x, int halfBoard)
+        {
+            if (x > halfBoard)
+            {
+                return GetInverseXRight(x, halfBoard);
+            }
+            if (x < halfBoard)
+            {
+                return GetInverseXLeft(x, halfBoard);
+            }
+            return x; //Exact centre
+        }
+
+        private static int GetInverseXLeft(int x, int halfBoard)
+        {
+            return halfBoard + (halfBoard - x);
+        }
+        
+        private static int GetInverseXRight(int x, int halfBoard)
+        {
+            return halfBoard + (halfBoard - x);
         }
 
         public Direction GetPlayerDirection()
