@@ -3,7 +3,7 @@ public static class ProjectSettings
     public struct DebugSettings
     {
         public const bool DebugTools = true;
-        private const bool _debugGridIndices = true;
+        private const bool _debugGridIndices = false;
         public static bool DebugGridIndices => _debugGridIndices && DebugTools;
     
         private const bool _debugEnemyTargets = true;
