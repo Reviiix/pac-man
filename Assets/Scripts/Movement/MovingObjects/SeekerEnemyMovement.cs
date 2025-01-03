@@ -83,8 +83,9 @@ namespace Movement.MovingObjects
 
         private GridItem GetScaredTarget()
         {
-            const int distanceBeforeRetreat = 5;
-            return path.Count <= distanceBeforeRetreat ? MovementManager.Instance.GetInversePlayerTransform() : MovementManager.Instance.GetPlayerTransform();
+            const int distanceBeforeRetreat = 9;
+            var player = MovementManager.Instance.GetPlayersNextPosition();
+            return pathFinder.FindPath(current, player).Count <= distanceBeforeRetreat ? MovementManager.Instance.GetInversePlayerTransform() : player;
         }
         
         private GridItem GetCutOffTarget()
