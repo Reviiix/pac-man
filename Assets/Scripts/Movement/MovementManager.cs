@@ -97,27 +97,27 @@ namespace Movement
             return GridManager.Instance.GetItem(new KeyValuePair<int, int>(GetInverseX(original.Indices.Key, GridManager.Instance.amountOfColumns / 2), original.Indices.Value));
         }
 
-        private static int GetInverseX(int x, int halfBoard)
+        private static int GetInverseX(int x, int centreX)
         {
-            if (x > halfBoard)
+            if (x > centreX)
             {
-                return GetInverseXRight(x, halfBoard);
+                return GetInverseXRight(x, centreX);
             }
-            if (x < halfBoard)
+            if (x < centreX)
             {
-                return GetInverseXLeft(x, halfBoard);
+                return GetInverseXLeft(x, centreX);
             }
             return x; //Exact centre
         }
 
-        private static int GetInverseXLeft(int x, int halfBoard)
+        private static int GetInverseXLeft(int x, int centreX)
         {
-            return halfBoard + (halfBoard - x);
+            return centreX + (centreX - x);
         }
         
-        private static int GetInverseXRight(int x, int halfBoard)
+        private static int GetInverseXRight(int x, int centreX)
         {
-            return halfBoard + (halfBoard - x);
+            return centreX + (centreX - x);
         }
 
         public Direction GetPlayerDirection()
