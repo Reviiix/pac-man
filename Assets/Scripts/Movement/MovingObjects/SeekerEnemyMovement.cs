@@ -29,9 +29,13 @@ namespace Movement.MovingObjects
             base.Initialise(coroutineHandler);
             if (type == SeekerType.Scared)
             {
-                LogManager.Log("You are using an enemy type that is dependant on a horizontally symmetrical map");
+                LogManager.Log("You are using an enemy type that is dependant on a horizontally symmetrical map.");
             }
-            targetDebug.gameObject.SetActive(ProjectSettings.DebugSettings.DebugEnemyTargets);
+
+            if (targetDebug != null)
+            {
+                targetDebug.gameObject.SetActive(ProjectSettings.DebugSettings.DebugEnemyTargets);
+            }
         }
 
         protected override void OnDestinationReached()
