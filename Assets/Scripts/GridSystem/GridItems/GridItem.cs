@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Movement;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,13 +21,23 @@ namespace GridSystem.GridItems
         public GridItem[] Neighbors { get; private set; }
         #if UNITY_EDITOR
         [SerializeField] protected GameObject pelletPrefab; //These references are only needed while building the Grid, no point in storing them in builds
-        [SerializeField] protected GameObject bonusItemPrefab; 
+        [SerializeField] protected GameObject bonusItemPrefab;
         #endif
+        [SerializeField] private TMP_Text debugIndices;
 
         public void Initialise(KeyValuePair<int, int> indices)
         {
             Display = GetComponent<Image>();
             Indices = indices;
+
+            if (ProjectSettings.DebugSettings.DebugGridIndices)
+            {
+                debugIndices.text = $"{Indices.Key},{Indices.Value}";
+            }
+            else
+            {
+                Destroy(debugIndices.gameObject);
+            }
         }
 
         public void SetNeighbors()

@@ -1,9 +1,10 @@
 using System;
+using System.Collections.Generic;
 using Abstractions;
+using GridSystem;
 using GridSystem.GridItems;
 using Movement.MovingObjects;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Movement
 {
@@ -14,8 +15,6 @@ namespace Movement
         [SerializeField] private PlayerMovement player;
         [SerializeField] private SeekerEnemyMovement[] seekerEnemy;
         private bool canMove;
-        
-        public Transform targetDebug;
 
         public void Initialise()
         {
@@ -83,9 +82,42 @@ namespace Movement
             return array;
         }
         
-        public GridItem GetPlayerTransform()
+        public GridItem GetPlayersNextPosition()
         {
             return player.GetNextPosition();
+        }
+        
+        public GridItem GetInversePlayerTransform()
+        {
+            return GetInverseGridItem(GetPlayersNextPosition());
+        }
+        
+        private static GridItem GetInverseGridItem(GridItem original)
+        {
+            return GridManager.Instance.GetItem(new KeyValuePair<int, int>(GetInverseX(original.Indices.Key, GridManager.Instance.amountOfColumns / 2), original.Indices.Value));
+        }
+
+        private static int GetInverseX(int x, int centreX)
+        {
+            if (x > centreX)
+            {
+                return GetInverseXRight(x, centreX);
+            }
+            if (x < centreX)
+            {
+                return GetInverseXLeft(x, centreX);
+            }
+            return x; //Exact centre
+        }
+
+        private static int GetInverseXLeft(int x, int centreX)
+        {
+            return centreX + (centreX - x);
+        }
+        
+        private static int GetInverseXRight(int x, int centreX)
+        {
+            return centreX + (centreX - x);
         }
 
         public Direction GetPlayerDirection()

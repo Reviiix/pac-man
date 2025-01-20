@@ -1,10 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Net.Mime;
 using GridSystem.GridItems;
 using UnityEngine;
-using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 namespace Movement.MovingObjects
@@ -13,17 +11,31 @@ namespace Movement.MovingObjects
     public class SeekerEnemyMovement : MovingObject
     {
         [SerializeField] private Pathfinder pathFinder;
-        private Queue<GridItem> path;
-        public GridItem target { get; private set; }
+        private Queue<GridItem> path = new ();
+        public GridItem Target { get; private set; }
         public SeekerType type;
-        
         private readonly MovementManager.Direction[] randomDirections = MovementManager.Directions;
 
         public enum SeekerType
         {
             Chase,
             CutOff,
-            Random
+            Random,
+            Scared
+        }
+
+        public override void Initialise(MonoBehaviour coroutineHandler)
+        {
+            base.Initialise(coroutineHandler);
+            if (type == SeekerType.Scared)
+            {
+                LogManager.Log("You are using an enemy type that is dependant on a horizontally symmetrical map.");
+            }
+
+            if (targetDebug != null)
+            {
+                targetDebug.gameObject.SetActive(ProjectSettings.DebugSettings.DebugEnemyTargets);
+            }
         }
 
         protected override void OnDestinationReached()
@@ -39,6 +51,7 @@ namespace Movement.MovingObjects
             {
                 case SeekerType.Chase:
                 case SeekerType.CutOff:
+                case SeekerType.Scared:
                     UpdatePath();
                     if (PathComplete(path)) return;
                     path.Dequeue(); //Current position
@@ -51,6 +64,8 @@ namespace Movement.MovingObjects
                         ChangeDirection(GetValidRandomDirection(currentMovementDirection));   
                     }
                     break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
         }
         
@@ -77,10 +92,24 @@ namespace Movement.MovingObjects
                 return randomDirection;
             }
         }
+
+        /// <summary>
+        /// If path towards player is greater than X spaces away, seek the player out.
+        /// if the path towards the player is less than X spaces away then retreat to the opposite side of the board.
+        /// </summary>
+        private GridItem GetScaredTarget()
+        {
+            const int distanceBeforeRetreat = 9;
+            var player = MovementManager.Instance.GetPlayersNextPosition();
+            return pathFinder.FindPath(current, player).Count <= distanceBeforeRetreat ? MovementManager.Instance.GetInversePlayerTransform() : player;
+        }
         
+        /// <summary>
+        /// Predict where the player is moving too and seek out the space X amount of spaces in front of them.
+        /// </summary>
         private GridItem GetCutOffTarget()
         {
-            var cutoffTarget = MovementManager.Instance.GetPlayerTransform();
+            var cutoffTarget = MovementManager.Instance.GetPlayersNextPosition();
             var direction = MovementManager.Instance.GetPlayerDirection();
             var previousDirection = direction;
             var spacesAhead = 3;
@@ -128,18 +157,22 @@ namespace Movement.MovingObjects
             switch (type)
             {
                 case SeekerType.Chase:
-                    target = MovementManager.Instance.GetPlayerTransform();
+                    Target = MovementManager.Instance.GetPlayersNextPosition();
                     break;
                 case SeekerType.CutOff:
-                    target = GetCutOffTarget();
-                    MovementManager.Instance.targetDebug.position = target.transform.position;
+                    Target = GetCutOffTarget();
                     break;
-                default:
-                    target = MovementManager.Instance.GetPlayerTransform();
+                case SeekerType.Scared:
+                    Target = GetScaredTarget();
                     break;
             }
             
-            path  = pathFinder.FindPath(current, target);
+            path  = pathFinder.FindPath(current, Target);
+            
+            if (ProjectSettings.DebugSettings.DebugEnemyTargets)
+            {
+                targetDebug.position = Target.transform.position;
+            }
         }
 
         private bool PathComplete(ICollection p)

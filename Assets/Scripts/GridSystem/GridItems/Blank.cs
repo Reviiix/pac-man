@@ -5,12 +5,12 @@ namespace GridSystem.GridItems
 {
     public class Blank : GridItem
     {
+        #if UNITY_EDITOR
         private bool hasPellet;
         [CanBeNull] private GameObject pellet;
         private bool hasBonusItem;
         [CanBeNull] private GameObject bonusItem;
 
-        #if UNITY_EDITOR
         public void InitialiseBlank(GameObject newPelletPrefab, GameObject newBonusItemPrefab)
         {
             Initialise(Indices);
