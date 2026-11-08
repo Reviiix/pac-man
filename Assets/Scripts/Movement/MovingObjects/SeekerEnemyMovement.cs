@@ -101,7 +101,10 @@ namespace Movement.MovingObjects
         {
             const int distanceBeforeRetreat = 9;
             var player = MovementManager.Instance.GetPlayersNextPosition();
-            return pathFinder.FindPath(current, player).Count <= distanceBeforeRetreat ? MovementManager.Instance.GetInversePlayerTransform() : player;
+            var pathToPlayer = pathFinder.FindPath(current, player);
+            var noRouteToPlayer = pathToPlayer == null;
+            if (noRouteToPlayer) return player;
+            return pathToPlayer.Count <= distanceBeforeRetreat ? MovementManager.Instance.GetInversePlayerTransform() : player;
         }
         
         /// <summary>
@@ -169,7 +172,7 @@ namespace Movement.MovingObjects
             
             path  = pathFinder.FindPath(current, Target);
             
-            if (ProjectSettings.DebugSettings.DebugEnemyTargets)
+            if (ProjectSettings.DebugSettings.DebugEnemyTargets && targetDebug != null && Target != null)
             {
                 targetDebug.position = Target.transform.position;
             }

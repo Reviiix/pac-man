@@ -17,6 +17,7 @@ namespace GridSystem.GridItems
         #region Pathfinding
         public int gCost;
         public int fCost;
+        private int hCost;
         #endregion
         public GridItem[] Neighbors { get; private set; }
         #if UNITY_EDITOR
@@ -87,34 +88,44 @@ namespace GridSystem.GridItems
             return Neighbors.FirstOrDefault(x => x.Indices.Key == Indices.Key + 1);
         }
         
-        public void CalculateGAndHCost(GridItem current, int gCosts)
+        /// <summary>
+        /// Records a cheaper route to this item via the given item, along with the estimated cost to the target.
+        /// </summary>
+        public void CalculateGAndHCost(GridItem current, int costFromStart, int estimatedCostToTarget)
         {
             previous = current;
-            SetGCost(gCosts);
+            gCost = costFromStart;
+            hCost = estimatedCostToTarget;
             CalculateFCost();
         }
-        
+
+        /// <summary>
+        /// Marks this item as unvisited, setting fCost directly so it cannot overflow.
+        /// </summary>
         public void InitialisePathfindingValues()
         {
             gCost = int.MaxValue;
-            CalculateFCost();
+            hCost = 0;
+            fCost = int.MaxValue;
             previous = null;
         }
-        
-        public void SetPathFindingStartPosition()
+
+        /// <summary>
+        /// Marks this item as the start of a path search.
+        /// </summary>
+        public void SetPathFindingStartPosition(int estimatedCostToTarget)
         {
             gCost = 0;
+            hCost = estimatedCostToTarget;
             CalculateFCost();
         }
-        
+
+        /// <summary>
+        /// Sums the cost so far and the estimated cost to the target.
+        /// </summary>
         private void CalculateFCost()
         {
-            fCost = gCost + fCost;
-        }
-        
-        private void SetGCost(int cost)
-        {
-            gCost = cost;
+            fCost = gCost + hCost;
         }
         
         public bool MultiplePathWaysAvailable()

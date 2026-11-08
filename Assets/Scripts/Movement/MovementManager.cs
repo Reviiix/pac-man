@@ -15,9 +15,11 @@ namespace Movement
         [SerializeField] private PlayerMovement player;
         [SerializeField] private SeekerEnemyMovement[] seekerEnemy;
         private bool canMove;
+        private readonly Dictionary<GridItem, GridItem> mirroredWalkableItems = new();
 
         public void Initialise()
         {
+            CacheMirroredWalkableItems();
             CreateCollection();
             player.Initialise(this);
             foreach (var seeker in seekerEnemy)
@@ -89,35 +91,55 @@ namespace Movement
         
         public GridItem GetInversePlayerTransform()
         {
-            return GetInverseGridItem(GetPlayersNextPosition());
+            var playerPosition = GetPlayersNextPosition();
+            return mirroredWalkableItems.TryGetValue(playerPosition, out var mirrored) ? mirrored : playerPosition;
         }
-        
+
+        /// <summary>
+        /// Precomputes the walkable mirror of every walkable item so the Scared ghost does no searching at runtime.
+        /// </summary>
+        private void CacheMirroredWalkableItems()
+        {
+            mirroredWalkableItems.Clear();
+            foreach (var gridItem in GridManager.Instance.gridItems)
+            {
+                if (gridItem is Wall) continue;
+                mirroredWalkableItems[gridItem] = GetInverseGridItem(gridItem);
+            }
+        }
+
+        /// <summary>
+        /// Mirrors the item horizontally across the grid, falling back to the nearest walkable item when the mirror is a wall.
+        /// </summary>
         private static GridItem GetInverseGridItem(GridItem original)
         {
-            return GridManager.Instance.GetItem(new KeyValuePair<int, int>(GetInverseX(original.Indices.Key, GridManager.Instance.amountOfColumns / 2), original.Indices.Value));
+            var inverseX = GridManager.Instance.amountOfColumns - 1 - original.Indices.Key;
+            var mirrored = GridManager.Instance.GetItem(new KeyValuePair<int, int>(inverseX, original.Indices.Value));
+            if (mirrored == null) return original;
+            return mirrored is Wall ? GetNearestWalkableItem(mirrored) ?? original : mirrored;
         }
 
-        private static int GetInverseX(int x, int centreX)
+        /// <summary>
+        /// Breadth-first search outward from the given item until a non-wall item is found.
+        /// </summary>
+        private static GridItem GetNearestWalkableItem(GridItem start)
         {
-            if (x > centreX)
+            var visited = new HashSet<GridItem> { start };
+            var queue = new Queue<GridItem>();
+            queue.Enqueue(start);
+            while (queue.Count > 0)
             {
-                return GetInverseXRight(x, centreX);
+                var item = queue.Dequeue();
+                if (item is not Wall) return item;
+                foreach (var neighbor in item.Neighbors)
+                {
+                    if (visited.Add(neighbor))
+                    {
+                        queue.Enqueue(neighbor);
+                    }
+                }
             }
-            if (x < centreX)
-            {
-                return GetInverseXLeft(x, centreX);
-            }
-            return x; //Exact centre
-        }
-
-        private static int GetInverseXLeft(int x, int centreX)
-        {
-            return centreX + (centreX - x);
-        }
-        
-        private static int GetInverseXRight(int x, int centreX)
-        {
-            return centreX + (centreX - x);
+            return null;
         }
 
         public Direction GetPlayerDirection()
@@ -137,13 +159,18 @@ namespace Movement
             };
         }
 
+        /// <summary>
+        /// Returns the direction from an item to its adjacent neighbor, with rows indexed top to bottom so Up is Value - 1.
+        /// </summary>
         public static Direction GetDirectionOfNeighbor(GridItem original, GridItem neighbor)
         {
-            if (neighbor.Indices.Key <= original.Indices.Key) return Direction.Left;
-            if (neighbor.Indices.Key >= original.Indices.Key) return Direction.Right;
-            if (neighbor.Indices.Value >= original.Indices.Value) return Direction.Up;
-            if (neighbor.Indices.Value <= original.Indices.Value) return Direction.Down;
-            Debug.Log($"{nameof(original)} has no neighbors");
+            var deltaX = neighbor.Indices.Key - original.Indices.Key;
+            var deltaY = neighbor.Indices.Value - original.Indices.Value;
+            if (deltaX < 0) return Direction.Left;
+            if (deltaX > 0) return Direction.Right;
+            if (deltaY < 0) return Direction.Up;
+            if (deltaY > 0) return Direction.Down;
+            Debug.LogWarning($"{nameof(GetDirectionOfNeighbor)} was given the same grid item twice ({original.Indices.Key},{original.Indices.Value}).");
             return Direction.Left;
         }
 

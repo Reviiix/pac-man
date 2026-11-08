@@ -79,7 +79,6 @@ namespace GridSystem.GridItems
             var parent = transform;
             bonusItem = Instantiate(bonusItemPrefab, parent.position, Quaternion.identity, parent);
             bonusItem.GetComponent<BonusItem>().Initialise(this);
-            PelletManager.Instance.AddPelletToList(this);
         }
         
         [ContextMenu(nameof(RemoveBonusItem))]
