@@ -16,7 +16,8 @@ namespace GridSystem
 
         public void Initialise()
         {
-            numberOfPellets = allActivePellets.Count;
+            //Only count tiles that actually hold a pellet, so stale entries or bonus-item tiles don't inflate the total.
+            numberOfPellets = allActivePellets.Count(tile => tile != null && tile.GetComponentInChildren<Pellet>() != null);
         }
 
         public void AddPelletToList(Blank gridItem)

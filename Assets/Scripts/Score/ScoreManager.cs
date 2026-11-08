@@ -10,6 +10,7 @@ namespace GameStates
     {
         public static Action<int> OnScoreChange;
         private int totalPellets;
+        private int pelletsEaten; //Tracked separately from score so bonus item points don't count towards winning.
         private int score;
         private bool gameWon;
         [SerializeField] private Sprite[] bonusPickUpSprites;
@@ -22,6 +23,7 @@ namespace GameStates
         public void IncrementPelletsHit()
         {
             score++;
+            pelletsEaten++;
             gameWon = CheckGameWon();
             OnScoreChange?.Invoke(score);
 
@@ -34,12 +36,13 @@ namespace GameStates
         private void ResetPelletsAndPoints()
         {
             totalPellets = PelletManager.Instance.numberOfPellets;
+            pelletsEaten = 0;
             score = 0;
         }
 
         private bool CheckGameWon()
         {
-            return score >= totalPellets;
+            return pelletsEaten >= totalPellets;
         }
         
         public void BonusItemHit(BonusItem.BonusItemType type)
