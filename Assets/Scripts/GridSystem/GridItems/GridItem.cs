@@ -16,8 +16,8 @@ namespace GridSystem.GridItems
         public GridItem previous;
         #region Pathfinding
         public int gCost;
-        public int hCost;
         public int fCost;
+        private int hCost;
         #endregion
         public GridItem[] Neighbors { get; private set; }
         #if UNITY_EDITOR
@@ -91,11 +91,11 @@ namespace GridSystem.GridItems
         /// <summary>
         /// Records a cheaper route to this item via the given item, along with the estimated cost to the target.
         /// </summary>
-        public void CalculateGAndHCost(GridItem current, int gCosts, int hCosts)
+        public void CalculateGAndHCost(GridItem current, int costFromStart, int estimatedCostToTarget)
         {
             previous = current;
-            gCost = gCosts;
-            hCost = hCosts;
+            gCost = costFromStart;
+            hCost = estimatedCostToTarget;
             CalculateFCost();
         }
 
@@ -113,10 +113,10 @@ namespace GridSystem.GridItems
         /// <summary>
         /// Marks this item as the start of a path search.
         /// </summary>
-        public void SetPathFindingStartPosition(int hCosts)
+        public void SetPathFindingStartPosition(int estimatedCostToTarget)
         {
             gCost = 0;
-            hCost = hCosts;
+            hCost = estimatedCostToTarget;
             CalculateFCost();
         }
 
