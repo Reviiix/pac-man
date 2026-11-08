@@ -137,13 +137,18 @@ namespace Movement
             };
         }
 
+        /// <summary>
+        /// Rows are indexed top to bottom, so Up is Value - 1 and Down is Value + 1 (matches GridItem.GetAdjacentItem).
+        /// </summary>
         public static Direction GetDirectionOfNeighbor(GridItem original, GridItem neighbor)
         {
-            if (neighbor.Indices.Key <= original.Indices.Key) return Direction.Left;
-            if (neighbor.Indices.Key >= original.Indices.Key) return Direction.Right;
-            if (neighbor.Indices.Value >= original.Indices.Value) return Direction.Up;
-            if (neighbor.Indices.Value <= original.Indices.Value) return Direction.Down;
-            Debug.Log($"{nameof(original)} has no neighbors");
+            var deltaX = neighbor.Indices.Key - original.Indices.Key;
+            var deltaY = neighbor.Indices.Value - original.Indices.Value;
+            if (deltaX < 0) return Direction.Left;
+            if (deltaX > 0) return Direction.Right;
+            if (deltaY < 0) return Direction.Up;
+            if (deltaY > 0) return Direction.Down;
+            Debug.LogWarning($"{nameof(GetDirectionOfNeighbor)} was given the same grid item twice ({original.Indices.Key},{original.Indices.Value}).");
             return Direction.Left;
         }
 
