@@ -171,7 +171,7 @@ namespace Movement.MovingObjects
             
             path  = pathFinder.FindPath(current, Target);
             
-            if (ProjectSettings.DebugSettings.DebugEnemyTargets)
+            if (ProjectSettings.DebugSettings.DebugEnemyTargets && targetDebug != null && Target != null)
             {
                 targetDebug.position = Target.transform.position;
             }
