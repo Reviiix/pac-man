@@ -15,9 +15,9 @@ namespace GridSystem.GridItems
         protected Image Display;
         public GridItem previous;
         #region Pathfinding
-        public int gCost; //Cost of the cheapest known path from the start to this item.
-        public int hCost; //Estimated cost from this item to the target (heuristic).
-        public int fCost; //gCost + hCost, used to pick which item to explore next.
+        public int gCost;
+        public int hCost;
+        public int fCost;
         #endregion
         public GridItem[] Neighbors { get; private set; }
         #if UNITY_EDITOR
@@ -88,6 +88,9 @@ namespace GridSystem.GridItems
             return Neighbors.FirstOrDefault(x => x.Indices.Key == Indices.Key + 1);
         }
         
+        /// <summary>
+        /// Records a cheaper route to this item via the given item, along with the estimated cost to the target.
+        /// </summary>
         public void CalculateGAndHCost(GridItem current, int gCosts, int hCosts)
         {
             previous = current;
@@ -96,15 +99,20 @@ namespace GridSystem.GridItems
             CalculateFCost();
         }
 
+        /// <summary>
+        /// Marks this item as unvisited, setting fCost directly so it cannot overflow.
+        /// </summary>
         public void InitialisePathfindingValues()
         {
-            //Unvisited items are "infinitely" far away. fCost is set directly rather than summed to avoid int overflow.
             gCost = int.MaxValue;
             hCost = 0;
             fCost = int.MaxValue;
             previous = null;
         }
 
+        /// <summary>
+        /// Marks this item as the start of a path search.
+        /// </summary>
         public void SetPathFindingStartPosition(int hCosts)
         {
             gCost = 0;
@@ -112,6 +120,9 @@ namespace GridSystem.GridItems
             CalculateFCost();
         }
 
+        /// <summary>
+        /// Sums the cost so far and the estimated cost to the target.
+        /// </summary>
         private void CalculateFCost()
         {
             fCost = gCost + hCost;

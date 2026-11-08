@@ -9,6 +9,9 @@ namespace Abstractions
     {
         public static T Instance { get; private set; }
 
+        /// <summary>
+        /// Registers this component as the instance, or removes it if another instance is already registered.
+        /// </summary>
         protected virtual void OnEnable()
         {
             if (Instance != null && !ReferenceEquals(Instance, this))
@@ -21,9 +24,11 @@ namespace Abstractions
             Instance = this as T;
         }
 
+        /// <summary>
+        /// Clears the instance only if this is the registered one, so removing a duplicate keeps the real instance.
+        /// </summary>
         protected virtual void OnDisable()
         {
-            //Only the active instance may clear itself, otherwise destroying a duplicate would wipe the real one.
             if (ReferenceEquals(Instance, this))
             {
                 Instance = null;
@@ -31,10 +36,16 @@ namespace Abstractions
         }
     }
 
+    /// <summary>
+    /// Singleton whose instance is only accessible to the inheriting class.
+    /// </summary>
     public abstract class PrivateSingleton<T> : MonoBehaviour where T : class
     {
         protected static T Instance;
 
+        /// <summary>
+        /// Registers this component as the instance, or removes it if another instance is already registered.
+        /// </summary>
         protected virtual void Awake()
         {
             if (Instance != null && !ReferenceEquals(Instance, this))
@@ -47,7 +58,9 @@ namespace Abstractions
             Instance = this as T;
         }
 
-        //Awake only runs once, so the instance is cleared on destroy rather than disable so it survives being re-enabled.
+        /// <summary>
+        /// Clears the instance on destroy rather than disable, because Awake will not run again to restore it.
+        /// </summary>
         protected virtual void OnDestroy()
         {
             if (ReferenceEquals(Instance, this))
@@ -57,8 +70,14 @@ namespace Abstractions
         }
     }
 
+    /// <summary>
+    /// Shared helpers for the singleton base classes.
+    /// </summary>
     internal static class SingletonUtility
     {
+        /// <summary>
+        /// Destroys a duplicate singleton component, using DestroyImmediate in edit mode where Destroy is not allowed.
+        /// </summary>
         public static void DestroyDuplicate(Component duplicate)
         {
             if (Application.isPlaying)
@@ -67,7 +86,6 @@ namespace Abstractions
             }
             else
             {
-                //Destroy is not allowed in edit mode (singletons using [ExecuteInEditMode]).
                 Object.DestroyImmediate(duplicate);
             }
         }

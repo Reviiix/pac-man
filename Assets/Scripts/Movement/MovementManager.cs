@@ -93,7 +93,7 @@ namespace Movement
         }
         
         /// <summary>
-        /// Mirrors the item horizontally across the grid. If the mirrored item is a wall, returns the nearest walkable item instead.
+        /// Mirrors the item horizontally across the grid, falling back to the nearest walkable item when the mirror is a wall.
         /// </summary>
         private static GridItem GetInverseGridItem(GridItem original)
         {
@@ -144,7 +144,7 @@ namespace Movement
         }
 
         /// <summary>
-        /// Rows are indexed top to bottom, so Up is Value - 1 and Down is Value + 1 (matches GridItem.GetAdjacentItem).
+        /// Returns the direction from an item to its adjacent neighbor, with rows indexed top to bottom so Up is Value - 1.
         /// </summary>
         public static Direction GetDirectionOfNeighbor(GridItem original, GridItem neighbor)
         {

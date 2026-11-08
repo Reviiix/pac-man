@@ -10,7 +10,7 @@ namespace GameStates
     {
         public static Action<int> OnScoreChange;
         private int totalPellets;
-        private int pelletsEaten; //Tracked separately from score so bonus item points don't count towards winning.
+        private int pelletsEaten;
         private int score;
         private bool gameWon;
         [SerializeField] private Sprite[] bonusPickUpSprites;
@@ -40,6 +40,9 @@ namespace GameStates
             score = 0;
         }
 
+        /// <summary>
+        /// The game is won once every pellet is eaten; bonus item points do not count towards it.
+        /// </summary>
         private bool CheckGameWon()
         {
             return pelletsEaten >= totalPellets;

@@ -34,6 +34,9 @@ namespace Movement
             }
         }
 
+        /// <summary>
+        /// Returns the shortest walkable path from start to end, or null when there is none.
+        /// </summary>
         public Queue<GridItem> FindPath(GridItem start, GridItem end)
         {
             if (start == null || end == null || end is Wall)
@@ -61,6 +64,9 @@ namespace Movement
             return null;
         }
 
+        /// <summary>
+        /// Records cheaper routes to the current item's walkable neighbors and adds them to the open list.
+        /// </summary>
         private void SetNeighbors(GridItem current, GridItem end)
         {
             foreach (var neighbor in current.Neighbors)
@@ -96,7 +102,7 @@ namespace Movement
         }
     
         /// <summary>
-        /// Manhattan distance: movement is restricted to 4 directions so there are no diagonal steps.
+        /// Returns the Manhattan distance cost between two items, since movement is restricted to 4 directions.
         /// </summary>
         private static int CalculateDistanceCost(GridItem a, GridItem b)
         {
