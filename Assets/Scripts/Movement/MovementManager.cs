@@ -15,9 +15,11 @@ namespace Movement
         [SerializeField] private PlayerMovement player;
         [SerializeField] private SeekerEnemyMovement[] seekerEnemy;
         private bool canMove;
+        private readonly Dictionary<GridItem, GridItem> mirroredWalkableItems = new();
 
         public void Initialise()
         {
+            CacheMirroredWalkableItems();
             CreateCollection();
             player.Initialise(this);
             foreach (var seeker in seekerEnemy)
@@ -89,9 +91,23 @@ namespace Movement
         
         public GridItem GetInversePlayerTransform()
         {
-            return GetInverseGridItem(GetPlayersNextPosition());
+            var playerPosition = GetPlayersNextPosition();
+            return mirroredWalkableItems.TryGetValue(playerPosition, out var mirrored) ? mirrored : playerPosition;
         }
-        
+
+        /// <summary>
+        /// Precomputes the walkable mirror of every walkable item so the Scared ghost does no searching at runtime.
+        /// </summary>
+        private void CacheMirroredWalkableItems()
+        {
+            mirroredWalkableItems.Clear();
+            foreach (var gridItem in GridManager.Instance.gridItems)
+            {
+                if (gridItem is Wall) continue;
+                mirroredWalkableItems[gridItem] = GetInverseGridItem(gridItem);
+            }
+        }
+
         /// <summary>
         /// Mirrors the item horizontally across the grid, falling back to the nearest walkable item when the mirror is a wall.
         /// </summary>
