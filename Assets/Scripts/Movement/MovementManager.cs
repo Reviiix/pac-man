@@ -92,32 +92,38 @@ namespace Movement
             return GetInverseGridItem(GetPlayersNextPosition());
         }
         
+        /// <summary>
+        /// Mirrors the item horizontally across the grid. If the mirrored item is a wall, returns the nearest walkable item instead.
+        /// </summary>
         private static GridItem GetInverseGridItem(GridItem original)
         {
-            return GridManager.Instance.GetItem(new KeyValuePair<int, int>(GetInverseX(original.Indices.Key, GridManager.Instance.amountOfColumns / 2), original.Indices.Value));
+            var inverseX = GridManager.Instance.amountOfColumns - 1 - original.Indices.Key;
+            var mirrored = GridManager.Instance.GetItem(new KeyValuePair<int, int>(inverseX, original.Indices.Value));
+            if (mirrored == null) return original;
+            return mirrored is Wall ? GetNearestWalkableItem(mirrored) ?? original : mirrored;
         }
 
-        private static int GetInverseX(int x, int centreX)
+        /// <summary>
+        /// Breadth-first search outward from the given item until a non-wall item is found.
+        /// </summary>
+        private static GridItem GetNearestWalkableItem(GridItem start)
         {
-            if (x > centreX)
+            var visited = new HashSet<GridItem> { start };
+            var queue = new Queue<GridItem>();
+            queue.Enqueue(start);
+            while (queue.Count > 0)
             {
-                return GetInverseXRight(x, centreX);
+                var item = queue.Dequeue();
+                if (item is not Wall) return item;
+                foreach (var neighbor in item.Neighbors)
+                {
+                    if (visited.Add(neighbor))
+                    {
+                        queue.Enqueue(neighbor);
+                    }
+                }
             }
-            if (x < centreX)
-            {
-                return GetInverseXLeft(x, centreX);
-            }
-            return x; //Exact centre
-        }
-
-        private static int GetInverseXLeft(int x, int centreX)
-        {
-            return centreX + (centreX - x);
-        }
-        
-        private static int GetInverseXRight(int x, int centreX)
-        {
-            return centreX + (centreX - x);
+            return null;
         }
 
         public Direction GetPlayerDirection()

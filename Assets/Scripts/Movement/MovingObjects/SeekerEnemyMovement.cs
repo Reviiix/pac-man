@@ -101,7 +101,9 @@ namespace Movement.MovingObjects
         {
             const int distanceBeforeRetreat = 9;
             var player = MovementManager.Instance.GetPlayersNextPosition();
-            return pathFinder.FindPath(current, player).Count <= distanceBeforeRetreat ? MovementManager.Instance.GetInversePlayerTransform() : player;
+            var pathToPlayer = pathFinder.FindPath(current, player);
+            if (pathToPlayer == null) return player; //No route to the player so there's nothing to retreat from.
+            return pathToPlayer.Count <= distanceBeforeRetreat ? MovementManager.Instance.GetInversePlayerTransform() : player;
         }
         
         /// <summary>
