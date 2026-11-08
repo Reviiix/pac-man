@@ -18,7 +18,6 @@ namespace Movement
         private List<GridItem> openList;
         private List<GridItem> closedList;
         private const int StraightMovementCost = 10;
-        private const int DiagonalMovementCost = 14;
 
         public static void Initialise(GridManager gridManager)
         {
@@ -37,10 +36,16 @@ namespace Movement
 
         public Queue<GridItem> FindPath(GridItem start, GridItem end)
         {
+            if (start == null || end == null || end is Wall)
+            {
+                Debug.LogWarning("No pathway available: start or end is missing, or end is a wall.");
+                return null;
+            }
+
             openList = new List<GridItem> { start };
             closedList = new List<GridItem>();
             SetInitialisePathfindingValues();
-            start.SetPathFindingStartPosition();
+            start.SetPathFindingStartPosition(CalculateDistanceCost(start, end));
             while (openList.Count > 0)
             {
                 var current = GetTheLowestFCostGridItem(openList);
@@ -50,13 +55,13 @@ namespace Movement
                 }
                 openList.Remove(current);
                 closedList.Add(current);
-                SetNeighbors(current);
+                SetNeighbors(current, end);
             }
             Debug.LogWarning("No pathway available.");
             return null;
         }
 
-        private void SetNeighbors(GridItem current)
+        private void SetNeighbors(GridItem current, GridItem end)
         {
             foreach (var neighbor in current.Neighbors)
             {
@@ -68,7 +73,7 @@ namespace Movement
             
                 if (potentialGCosts >= neighbor.gCost) continue;
             
-                neighbor.CalculateGAndHCost(current, potentialGCosts);
+                neighbor.CalculateGAndHCost(current, potentialGCosts, CalculateDistanceCost(neighbor, end));
 
                 if (!openList.Contains(neighbor))
                 {
@@ -90,11 +95,14 @@ namespace Movement
             return new Queue<GridItem>(path);
         }
     
+        /// <summary>
+        /// Manhattan distance: movement is restricted to 4 directions so there are no diagonal steps.
+        /// </summary>
         private static int CalculateDistanceCost(GridItem a, GridItem b)
         {
-            var x = (int)MathF.Abs(a.Indices.Key - b.Indices.Key);
-            var y = (int)MathF.Abs(a.Indices.Value - b.Indices.Value);
-            return DiagonalMovementCost * Mathf.Min(x, y) + StraightMovementCost * Mathf.Abs(x - y);
+            var x = Math.Abs(a.Indices.Key - b.Indices.Key);
+            var y = Math.Abs(a.Indices.Value - b.Indices.Value);
+            return StraightMovementCost * (x + y);
         }
 
         private static GridItem GetTheLowestFCostGridItem(IReadOnlyList<GridItem> items)

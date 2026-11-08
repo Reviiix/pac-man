@@ -15,8 +15,9 @@ namespace GridSystem.GridItems
         protected Image Display;
         public GridItem previous;
         #region Pathfinding
-        public int gCost;
-        public int fCost;
+        public int gCost; //Cost of the cheapest known path from the start to this item.
+        public int hCost; //Estimated cost from this item to the target (heuristic).
+        public int fCost; //gCost + hCost, used to pick which item to explore next.
         #endregion
         public GridItem[] Neighbors { get; private set; }
         #if UNITY_EDITOR
@@ -87,34 +88,33 @@ namespace GridSystem.GridItems
             return Neighbors.FirstOrDefault(x => x.Indices.Key == Indices.Key + 1);
         }
         
-        public void CalculateGAndHCost(GridItem current, int gCosts)
+        public void CalculateGAndHCost(GridItem current, int gCosts, int hCosts)
         {
             previous = current;
-            SetGCost(gCosts);
+            gCost = gCosts;
+            hCost = hCosts;
             CalculateFCost();
         }
-        
+
         public void InitialisePathfindingValues()
         {
+            //Unvisited items are "infinitely" far away. fCost is set directly rather than summed to avoid int overflow.
             gCost = int.MaxValue;
-            CalculateFCost();
+            hCost = 0;
+            fCost = int.MaxValue;
             previous = null;
         }
-        
-        public void SetPathFindingStartPosition()
+
+        public void SetPathFindingStartPosition(int hCosts)
         {
             gCost = 0;
+            hCost = hCosts;
             CalculateFCost();
         }
-        
+
         private void CalculateFCost()
         {
-            fCost = gCost + fCost;
-        }
-        
-        private void SetGCost(int cost)
-        {
-            gCost = cost;
+            fCost = gCost + hCost;
         }
         
         public bool MultiplePathWaysAvailable()
