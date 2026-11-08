@@ -5,10 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c58d8378-5f45-4888-8846-57f9124cd50c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.pac-man/.idea/projectSettingsUpdater.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.pac-man/.idea/projectSettingsUpdater.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.pac-man/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.pac-man/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Pacman.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Pacman.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Movement/MovementManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Movement/MovementManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Movement/MovingObjects/SeekerEnemyMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Movement/MovingObjects/SeekerEnemyMovement.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Fonts/PixelFont/PixelFont.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Fonts/PixelFont/PixelFont.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,7 +21,10 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItems/Blank.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItems/Pellet.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItems/Wall.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/LogManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/ProjectInitializer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/ProjectSettings.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/3ff87c59c5ac40d69c02c27bc5571d641dd800/5d/906edeb7/Object.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/Library/Unity/cache/packages/packages.unity.com/com.unity.burst@1.8.17/Editor/BurstDisassembler.Core.x86.info.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/Library/Unity/cache/packages/packages.unity.com/com.unity.burst@1.8.17/Tests/Runtime/Shared/081-UnityMath.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/Library/Unity/cache/packages/packages.unity.com/com.unity.burst@1.8.17/Tests/Runtime/Shared/084-Loops.cs" root0="SKIP_HIGHLIGHTING" />
@@ -46,25 +48,20 @@
     &quot;Discover.Launch.Via.Unity&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
-  },
-  &quot;keyToStringList&quot;: {
-    &quot;rider.external.source.directories&quot;: [
-      &quot;/Users/michaelmunevans/Library/Application Support/JetBrains/Rider2023.3/resharper-host/DecompilerCache&quot;,
-      &quot;/Users/michaelmunevans/Library/Application Support/JetBrains/Rider2023.3/resharper-host/SourcesCache&quot;,
-      &quot;/Users/michaelmunevans/.local/share/Symbols/src&quot;
-    ]
   }
 }</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="$PROJECT_DIR$/../../UnityEditors/6000.0.21f1/Unity.app/Contents/MacOS/Unity" />
+      <option name="EXE_PATH" value="/Applications/UnityInstalls/6000.0.21f1/Unity.app/Contents/MacOS/Unity" />
       <option name="PROGRAM_PARAMETERS" value="-projectPath $PROJECT_DIR$ -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -72,7 +69,7 @@
       <method v="2" />
     </configuration>
     <configuration name="Unit Tests (batch mode)" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="$PROJECT_DIR$/../../UnityEditors/6000.0.21f1/Unity.app/Contents/MacOS/Unity" />
+      <option name="EXE_PATH" value="/Applications/UnityInstalls/6000.0.21f1/Unity.app/Contents/MacOS/Unity" />
       <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath $PROJECT_DIR$ -testResults Logs/results.xml -testPlatform EditMode -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -92,6 +89,9 @@
       <option name="listenPortForConnections" value="false" />
       <option name="pid" />
       <option name="projectPathOnTarget" />
+      <option name="runtimes">
+        <list />
+      </option>
       <option name="selectedOptions">
         <list />
       </option>
@@ -102,6 +102,9 @@
       <option name="listenPortForConnections" value="false" />
       <option name="pid" />
       <option name="projectPathOnTarget" />
+      <option name="runtimes">
+        <list />
+      </option>
       <option name="selectedOptions">
         <list />
       </option>
@@ -132,6 +135,12 @@
       <workItem from="1730110668743" duration="1617000" />
       <workItem from="1730285713563" duration="15891000" />
       <workItem from="1734511172327" duration="9762000" />
+      <workItem from="1735823670740" duration="27154000" />
+      <workItem from="1735935910475" duration="1022000" />
+      <workItem from="1737390278478" duration="714000" />
+      <workItem from="1741874244526" duration="619000" />
+      <workItem from="1741967401440" duration="1792000" />
+      <workItem from="1748951097940" duration="1037000" />
     </task>
     <servers />
   </component>
@@ -139,6 +148,11 @@
     <option name="version" value="3" />
   </component>
   <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
+  <component name="UnityProjectDiscoverer">
+    <option name="hasUnityReference" value="true" />
+    <option name="unityProject" value="true" />
+    <option name="unityProjectFolder" value="true" />
+  </component>
   <component name="UnityUnitTestConfiguration" currentTestLauncher="EditMode" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
@@ -149,7 +163,7 @@
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItems/Blank.cs</url>
           <line>15</line>
-          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItems/Blank.cs" initialLine="12" containingFunctionPresentation="method 'RemovePellet'">
+          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItems/Blank.cs" containingFunctionPresentation="method 'RemovePellet'">
             <startOffsets>
               <option value="374" />
             </startOffsets>
@@ -162,7 +176,7 @@
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItems/Blank.cs</url>
           <line>28</line>
-          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItems/Blank.cs" initialLine="20" containingFunctionPresentation="method 'DestroyPelletObject'">
+          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItems/Blank.cs" containingFunctionPresentation="method 'DestroyPelletObject'">
             <startOffsets>
               <option value="756" />
             </startOffsets>
@@ -175,7 +189,7 @@
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItems/Blank.cs</url>
           <line>34</line>
-          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItems/Blank.cs" initialLine="26" containingFunctionPresentation="lambda expression inside method 'DestroyPelletObject'">
+          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItems/Blank.cs" containingFunctionPresentation="lambda expression inside method 'DestroyPelletObject'">
             <startOffsets>
               <option value="918" />
             </startOffsets>
@@ -188,7 +202,7 @@
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/GridSystem/GridManager.cs</url>
           <line>84</line>
-          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/GridSystem/GridManager.cs" initialLine="90" containingFunctionPresentation="method 'CreateGrid'">
+          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/GridSystem/GridManager.cs" containingFunctionPresentation="method 'CreateGrid'">
             <startOffsets>
               <option value="3052" />
             </startOffsets>
@@ -201,7 +215,7 @@
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItems/Blank.cs</url>
           <line>23</line>
-          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItems/Blank.cs" initialLine="23" containingFunctionPresentation="Method 'DestroyPelletObject'">
+          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItems/Blank.cs" containingFunctionPresentation="Method 'DestroyPelletObject'">
             <startOffsets>
               <option value="586" />
             </startOffsets>
@@ -214,7 +228,7 @@
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItems/Blank.cs</url>
           <line>21</line>
-          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItems/Blank.cs" initialLine="21" containingFunctionPresentation="Method 'DestroyPelletObject'">
+          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItems/Blank.cs" containingFunctionPresentation="Method 'DestroyPelletObject'">
             <startOffsets>
               <option value="536" />
             </startOffsets>
@@ -227,7 +241,7 @@
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItems/Blank.cs</url>
           <line>24</line>
-          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItems/Blank.cs" initialLine="24" containingFunctionPresentation="Method 'DestroyPelletObject'">
+          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/GridSystem/GridItems/Blank.cs" containingFunctionPresentation="Method 'DestroyPelletObject'">
             <startOffsets>
               <option value="645" />
               <option value="665" />
